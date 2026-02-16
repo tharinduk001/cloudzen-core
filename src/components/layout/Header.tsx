@@ -19,7 +19,7 @@ const moreNav = [
   { label: "Learning Paths", path: "/learning-paths" },
   { label: "Roadmaps", path: "/roadmaps" },
   { label: "Interview Prep", path: "/interview-prep" },
-  { label: "University Modules", path: "/university-modules" },
+  
   { label: "Consultations", path: "/consultations" },
   { label: "Challenges", path: "/challenges" },
 ];

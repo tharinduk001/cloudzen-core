@@ -14,7 +14,7 @@ const footerLinks = {
   Resources: [
     { label: "Blog", path: "/blog" },
     { label: "Interview Prep", path: "/interview-prep" },
-    { label: "University Modules", path: "/university-modules" },
+    
     { label: "Events", path: "/events" },
     { label: "Consultations", path: "/consultations" },
   ],

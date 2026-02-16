@@ -7,7 +7,7 @@ const routeLabels: Record<string, string> = {
   "learning-paths": "Learning Paths",
   roadmaps: "Roadmaps",
   "interview-prep": "Interview Prep",
-  "university-modules": "University Modules",
+  
   events: "Events",
   blog: "Blog",
   instructors: "Instructors",

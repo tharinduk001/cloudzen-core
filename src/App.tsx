@@ -15,7 +15,7 @@ import LearningPathDetail from "./pages/LearningPathDetail";
 import Roadmaps from "./pages/Roadmaps";
 import RoadmapDetail from "./pages/RoadmapDetail";
 import InterviewPrep from "./pages/InterviewPrep";
-import UniversityModules from "./pages/UniversityModules";
+
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail";
 import Blog from "./pages/Blog";
@@ -52,7 +52,7 @@ const App = () => (
               <Route path="/roadmaps" element={<Roadmaps />} />
               <Route path="/roadmaps/:id" element={<RoadmapDetail />} />
               <Route path="/interview-prep" element={<InterviewPrep />} />
-              <Route path="/university-modules" element={<UniversityModules />} />
+              
               <Route path="/events" element={<Events />} />
               <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/blog" element={<Blog />} />
