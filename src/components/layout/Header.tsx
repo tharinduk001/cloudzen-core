@@ -1,28 +1,46 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Home", path: "/" },
+const primaryNav = [
+  { label: "About", path: "/about" },
   { label: "Courses", path: "/courses" },
+  { label: "Instructors", path: "/instructors" },
   { label: "Projects", path: "/projects" },
+];
+
+const moreNav = [
   { label: "Learning Paths", path: "/learning-paths" },
   { label: "Roadmaps", path: "/roadmaps" },
   { label: "Interview Prep", path: "/interview-prep" },
   { label: "University Modules", path: "/university-modules" },
   { label: "Events", path: "/events" },
   { label: "Blog", path: "/blog" },
-  { label: "Instructors", path: "/instructors" },
   { label: "Consultations", path: "/consultations" },
+  { label: "Challenges", path: "/challenges" },
 ];
+
+const allNavItems = [...primaryNav, ...moreNav];
 
 export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
@@ -37,7 +55,7 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => (
+          {primaryNav.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -51,6 +69,39 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
               {item.label}
             </Link>
           ))}
+
+          {/* More dropdown */}
+          <div className="relative" ref={moreRef}>
+            <button
+              onClick={() => setMoreOpen(!moreOpen)}
+              className={cn(
+                "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted text-muted-foreground",
+                moreNav.some((item) => location.pathname === item.path) && "text-primary bg-primary/5"
+              )}
+            >
+              More
+              <ChevronDown className={cn("h-4 w-4 transition-transform", moreOpen && "rotate-180")} />
+            </button>
+            {moreOpen && (
+              <div className="absolute top-full right-0 mt-1 w-56 rounded-lg border border-border bg-popover p-1 shadow-lg animate-in fade-in-0 zoom-in-95">
+                {moreNav.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setMoreOpen(false)}
+                    className={cn(
+                      "block px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted",
+                      location.pathname === item.path
+                        ? "text-primary bg-primary/5"
+                        : "text-muted-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Right Actions */}
@@ -79,7 +130,7 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
                   <Search className="h-5 w-5" />
                   <span className="ml-2">Search</span>
                 </Button>
-                {navItems.map((item) => (
+                {allNavItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
