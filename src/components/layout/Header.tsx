@@ -11,6 +11,8 @@ const primaryNav = [
   { label: "Courses", path: "/courses" },
   { label: "Instructors", path: "/instructors" },
   { label: "Projects", path: "/projects" },
+  { label: "Events", path: "/events" },
+  { label: "Blog", path: "/blog" },
 ];
 
 const moreNav = [
@@ -18,8 +20,6 @@ const moreNav = [
   { label: "Roadmaps", path: "/roadmaps" },
   { label: "Interview Prep", path: "/interview-prep" },
   { label: "University Modules", path: "/university-modules" },
-  { label: "Events", path: "/events" },
-  { label: "Blog", path: "/blog" },
   { label: "Consultations", path: "/consultations" },
   { label: "Challenges", path: "/challenges" },
 ];
