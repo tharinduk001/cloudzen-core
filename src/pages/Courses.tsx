@@ -31,25 +31,25 @@ const Courses = () => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
         {filtered.length === 0 && <p className="text-muted-foreground col-span-full text-center py-12">No courses found.</p>}
         {filtered.map((course, i) => (
-          <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
-            <Link to={`/courses/${course.id}`}>
-              <Card className="hover-glow hover:border-primary/30 transition-all group h-full">
+          <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="h-full">
+            <Link to={`/courses/${course.id}`} className="block h-full">
+              <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
                 <div className="aspect-video bg-muted rounded-t-lg flex items-center justify-center">
                   <BookOpen className="h-8 w-8 text-muted-foreground/40" />
                 </div>
-                <CardContent className="p-4">
+                <CardContent className="p-4 flex-1 flex flex-col">
                   <div className="flex gap-2 mb-2 flex-wrap">
-                    <Badge variant="secondary" className="text-xs">{course.category}</Badge>
-                    <Badge variant="outline" className="text-xs">{course.level}</Badge>
-                    <Badge variant={course.price === "Free" ? "default" : "outline"} className="text-xs">
+                    <Badge variant="secondary" className="text-sm">{course.category}</Badge>
+                    <Badge variant="outline" className="text-sm">{course.level}</Badge>
+                    <Badge variant={course.price === "Free" ? "default" : "outline"} className="text-sm">
                       {course.price === "Free" ? "Free" : `$${course.price}`}
                     </Badge>
                   </div>
-                  <h3 className="font-display font-semibold mb-1 group-hover:text-primary transition-colors">{course.title}</h3>
-                  <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{course.description}</p>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{course.duration}</span>
-                    <span className="flex items-center gap-1"><Star className="h-3 w-3 text-yellow-500" />{course.rating}</span>
+                  <h3 className="font-display font-semibold text-base mb-1 group-hover:text-primary transition-colors">{course.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2 flex-1">{course.description}</p>
+                  <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
+                    <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{course.duration}</span>
+                    <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-yellow-500" />{course.rating}</span>
                   </div>
                   <Button size="sm" className="w-full mt-3 gradient-bg text-white border-0">Enroll</Button>
                 </CardContent>
