@@ -36,20 +36,18 @@ export function CloudCursor() {
       mouse.current.y = e.clientY;
 
       const now = Date.now();
-      if (now - lastSpawn < 30) return;
+      if (now - lastSpawn < 80) return;
       lastSpawn = now;
 
-      for (let i = 0; i < 3; i++) {
-        particles.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 20,
-          y: e.clientY + (Math.random() - 0.5) * 20,
-          size: Math.random() * 18 + 8,
-          opacity: Math.random() * 0.35 + 0.1,
-          vx: (Math.random() - 0.5) * 0.8,
-          vy: (Math.random() - 0.5) * 0.8 - 0.3,
-          life: 1,
-        });
-      }
+      particles.current.push({
+        x: e.clientX + (Math.random() - 0.5) * 10,
+        y: e.clientY + (Math.random() - 0.5) * 10,
+        size: Math.random() * 8 + 4,
+        opacity: Math.random() * 0.15 + 0.05,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4 - 0.2,
+        life: 1,
+      });
     };
 
     window.addEventListener("mousemove", onMove);
