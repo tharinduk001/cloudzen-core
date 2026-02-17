@@ -14,16 +14,557 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blog_posts: {
+        Row: {
+          author: string | null
+          category: string | null
+          content: string | null
+          created_at: string
+          date: string | null
+          excerpt: string | null
+          id: string
+          image: string | null
+          read_time: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          date?: string | null
+          excerpt?: string | null
+          id?: string
+          image?: string | null
+          read_time?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          date?: string | null
+          excerpt?: string | null
+          id?: string
+          image?: string | null
+          read_time?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bookmarks: {
+        Row: {
+          content_id: string
+          content_type: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          content_id: string
+          content_type: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          content_id?: string
+          content_type?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
+          badge: string | null
+          category: string
+          created_at: string
+          description: string | null
+          duration: string | null
+          id: string
+          image: string | null
+          instructor_id: string | null
+          level: string
+          price: number | null
+          rating: number | null
+          students: number | null
+          tags: string[] | null
+          title: string
+          type: string | null
+          updated_at: string
+        }
+        Insert: {
+          badge?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          image?: string | null
+          instructor_id?: string | null
+          level?: string
+          price?: number | null
+          rating?: number | null
+          students?: number | null
+          tags?: string[] | null
+          title: string
+          type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          badge?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          image?: string | null
+          instructor_id?: string | null
+          level?: string
+          price?: number | null
+          rating?: number | null
+          students?: number | null
+          tags?: string[] | null
+          title?: string
+          type?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_instructor_id_fkey"
+            columns: ["instructor_id"]
+            isOneToOne: false
+            referencedRelation: "instructors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enrollments: {
+        Row: {
+          completed: boolean | null
+          course_id: string
+          enrolled_at: string
+          id: string
+          progress: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          course_id: string
+          enrolled_at?: string
+          id?: string
+          progress?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          course_id?: string
+          enrolled_at?: string
+          id?: string
+          progress?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          date: string | null
+          description: string | null
+          id: string
+          is_past: boolean | null
+          location: string | null
+          speakers: string[] | null
+          time: string | null
+          title: string
+          type: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          id?: string
+          is_past?: boolean | null
+          location?: string | null
+          speakers?: string[] | null
+          time?: string | null
+          title: string
+          type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          id?: string
+          is_past?: boolean | null
+          location?: string | null
+          speakers?: string[] | null
+          time?: string | null
+          title?: string
+          type?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      instructors: {
+        Row: {
+          bio: string | null
+          courses_count: number | null
+          created_at: string
+          expertise: string[] | null
+          id: string
+          image: string | null
+          name: string
+          rating: number | null
+          socials: Json | null
+          students_count: number | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          courses_count?: number | null
+          created_at?: string
+          expertise?: string[] | null
+          id?: string
+          image?: string | null
+          name: string
+          rating?: number | null
+          socials?: Json | null
+          students_count?: number | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          courses_count?: number | null
+          created_at?: string
+          expertise?: string[] | null
+          id?: string
+          image?: string | null
+          name?: string
+          rating?: number | null
+          socials?: Json | null
+          students_count?: number | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      interview_questions: {
+        Row: {
+          answer: string | null
+          category: string | null
+          created_at: string
+          difficulty: string | null
+          id: string
+          question: string
+          role: string
+        }
+        Insert: {
+          answer?: string | null
+          category?: string | null
+          created_at?: string
+          difficulty?: string | null
+          id?: string
+          question: string
+          role: string
+        }
+        Update: {
+          answer?: string | null
+          category?: string | null
+          created_at?: string
+          difficulty?: string | null
+          id?: string
+          question?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      learning_paths: {
+        Row: {
+          course_ids: string[] | null
+          created_at: string
+          description: string | null
+          duration: string | null
+          id: string
+          level: string | null
+          project_ids: string[] | null
+          steps: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          level?: string | null
+          project_ids?: string[] | null
+          steps?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          level?: string | null
+          project_ids?: string[] | null
+          steps?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          difficulty: string | null
+          duration: string | null
+          id: string
+          image: string | null
+          title: string
+          tools: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: string | null
+          duration?: string | null
+          id?: string
+          image?: string | null
+          title: string
+          tools?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: string | null
+          duration?: string | null
+          id?: string
+          image?: string | null
+          title?: string
+          tools?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      roadmaps: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          milestones: Json | null
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          milestones?: Json | null
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          milestones?: Json | null
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          created_at: string
+          id: string
+          image: string | null
+          name: string
+          quote: string
+          rating: number | null
+          university: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image?: string | null
+          name: string
+          quote: string
+          rating?: number | null
+          university?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image?: string | null
+          name?: string
+          quote?: string
+          rating?: number | null
+          university?: string | null
+        }
+        Relationships: []
+      }
+      university_modules: {
+        Row: {
+          created_at: string
+          description: string | null
+          duration: string | null
+          id: string
+          lessons: number | null
+          outcomes: string[] | null
+          semester: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          lessons?: number | null
+          outcomes?: string[] | null
+          semester?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          lessons?: number | null
+          outcomes?: string[] | null
+          semester?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +691,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
