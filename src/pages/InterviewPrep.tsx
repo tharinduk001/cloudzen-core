@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -6,33 +6,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle2, AlertTriangle, Shuffle } from "lucide-react";
-import { interviewQuestions } from "@/data/mock-data";
+import { useInterviewQuestions } from "@/hooks/useData";
 
 const roles = ["Software Engineer", "DevOps Engineer", "Cloud Engineer"];
 
 const InterviewPrep = () => {
+  const { data: interviewQuestions = [], isLoading } = useInterviewQuestions();
   const [practiceMode, setPracticeMode] = useState(false);
-  const [practiceQuestions, setPracticeQuestions] = useState<typeof interviewQuestions>([]);
+  const [practiceQuestions, setPracticeQuestions] = useState<any[]>([]);
 
   const startPractice = (role: string) => {
-    const roleQs = interviewQuestions.filter((q) => q.role === role);
+    const roleQs = interviewQuestions.filter((q: any) => q.role === role);
     const shuffled = [...roleQs].sort(() => Math.random() - 0.5).slice(0, Math.min(10, roleQs.length));
     setPracticeQuestions(shuffled);
     setPracticeMode(true);
   };
 
   const QuestionsSection = ({ role }: { role: string }) => {
-    const questions = interviewQuestions.filter((q) => q.role === role);
+    const questions = interviewQuestions.filter((q: any) => q.role === role);
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">{questions.length} questions</p>
-          <Button variant="outline" size="sm" onClick={() => startPractice(role)}>
-            <Shuffle className="mr-2 h-4 w-4" />Quick Practice
-          </Button>
+          <Button variant="outline" size="sm" onClick={() => startPractice(role)}><Shuffle className="mr-2 h-4 w-4" />Quick Practice</Button>
         </div>
         <Accordion type="multiple" className="space-y-2">
-          {questions.map((q) => (
+          {questions.map((q: any) => (
             <AccordionItem key={q.id} value={q.id} className="border rounded-lg px-4">
               <AccordionTrigger className="text-sm font-medium text-left">
                 <div className="flex items-center gap-2 mr-4">
@@ -47,41 +46,34 @@ const InterviewPrep = () => {
             </AccordionItem>
           ))}
         </Accordion>
-
-        {/* Checklist & Mistakes */}
         <div className="grid md:grid-cols-2 gap-6 mt-8">
-          <Card>
-            <CardContent className="p-5">
-              <h3 className="font-display font-semibold mb-3">Mock Interview Checklist</h3>
-              <div className="space-y-2">
-                {["Research the company", "Review fundamentals", "Practice whiteboard coding", "Prepare STAR answers", "Test your setup (for virtual)"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm"><CheckCircle2 className="h-4 w-4 text-primary shrink-0" />{item}</div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-5">
-              <h3 className="font-display font-semibold mb-3">Common Mistakes</h3>
-              <div className="space-y-2">
-                {["Not asking clarifying questions", "Jumping to code without planning", "Ignoring edge cases", "Not explaining your thought process", "Forgetting to test your solution"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm"><AlertTriangle className="h-4 w-4 text-destructive shrink-0" />{item}</div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <Card><CardContent className="p-5">
+            <h3 className="font-display font-semibold mb-3">Mock Interview Checklist</h3>
+            <div className="space-y-2">
+              {["Research the company", "Review fundamentals", "Practice whiteboard coding", "Prepare STAR answers", "Test your setup (for virtual)"].map((item) => (
+                <div key={item} className="flex items-center gap-2 text-sm"><CheckCircle2 className="h-4 w-4 text-primary shrink-0" />{item}</div>
+              ))}
+            </div>
+          </CardContent></Card>
+          <Card><CardContent className="p-5">
+            <h3 className="font-display font-semibold mb-3">Common Mistakes</h3>
+            <div className="space-y-2">
+              {["Not asking clarifying questions", "Jumping to code without planning", "Ignoring edge cases", "Not explaining your thought process", "Forgetting to test your solution"].map((item) => (
+                <div key={item} className="flex items-center gap-2 text-sm"><AlertTriangle className="h-4 w-4 text-destructive shrink-0" />{item}</div>
+              ))}
+            </div>
+          </CardContent></Card>
         </div>
-
-        <Card className="gradient-bg-subtle">
-          <CardContent className="p-5 text-center">
-            <h3 className="font-display font-semibold mb-2">Want personalized prep?</h3>
-            <p className="text-sm text-muted-foreground mb-3">Book a 1:1 interview prep session with our experts.</p>
-            <Button asChild className="gradient-bg text-white border-0"><Link to="/consultations">Book a Session</Link></Button>
-          </CardContent>
-        </Card>
+        <Card className="gradient-bg-subtle"><CardContent className="p-5 text-center">
+          <h3 className="font-display font-semibold mb-2">Want personalized prep?</h3>
+          <p className="text-sm text-muted-foreground mb-3">Book a 1:1 interview prep session with our experts.</p>
+          <Button asChild className="gradient-bg text-white border-0"><Link to="/consultations">Book a Session</Link></Button>
+        </CardContent></Card>
       </div>
     );
   };
+
+  if (isLoading) return <div className="container py-20 text-center text-muted-foreground">Loading...</div>;
 
   if (practiceMode) {
     return (
@@ -92,11 +84,9 @@ const InterviewPrep = () => {
         </div>
         <p className="text-sm text-muted-foreground mb-6">{practiceQuestions.length} random questions. Reveal answers when ready.</p>
         <Accordion type="multiple" className="space-y-2">
-          {practiceQuestions.map((q, i) => (
+          {practiceQuestions.map((q: any, i: number) => (
             <AccordionItem key={q.id} value={q.id} className="border rounded-lg px-4">
-              <AccordionTrigger className="text-sm font-medium text-left">
-                <span className="mr-2 text-muted-foreground">Q{i + 1}.</span> {q.question}
-              </AccordionTrigger>
+              <AccordionTrigger className="text-sm font-medium text-left"><span className="mr-2 text-muted-foreground">Q{i + 1}.</span> {q.question}</AccordionTrigger>
               <AccordionContent className="text-sm text-muted-foreground">{q.answer}</AccordionContent>
             </AccordionItem>
           ))}
@@ -112,12 +102,8 @@ const InterviewPrep = () => {
         <p className="text-muted-foreground">Prepare for your next tech interview with curated questions and answers.</p>
       </div>
       <Tabs defaultValue="Software Engineer">
-        <TabsList>
-          {roles.map((role) => <TabsTrigger key={role} value={role}>{role}</TabsTrigger>)}
-        </TabsList>
-        {roles.map((role) => (
-          <TabsContent key={role} value={role}><QuestionsSection role={role} /></TabsContent>
-        ))}
+        <TabsList>{roles.map((role) => <TabsTrigger key={role} value={role}>{role}</TabsTrigger>)}</TabsList>
+        {roles.map((role) => (<TabsContent key={role} value={role}><QuestionsSection role={role} /></TabsContent>))}
       </Tabs>
     </div>
   );

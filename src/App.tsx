@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/hooks/useAuth";
 import { Layout } from "@/components/layout/Layout";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
@@ -15,7 +16,6 @@ import LearningPathDetail from "./pages/LearningPathDetail";
 import Roadmaps from "./pages/Roadmaps";
 import RoadmapDetail from "./pages/RoadmapDetail";
 import InterviewPrep from "./pages/InterviewPrep";
-
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail";
 import Blog from "./pages/Blog";
@@ -30,47 +30,60 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
 import NotFound from "./pages/NotFound";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:id" element={<CourseDetail />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/learning-paths" element={<LearningPaths />} />
-              <Route path="/learning-paths/:id" element={<LearningPathDetail />} />
-              <Route path="/roadmaps" element={<Roadmaps />} />
-              <Route path="/roadmaps/:id" element={<RoadmapDetail />} />
-              <Route path="/interview-prep" element={<InterviewPrep />} />
-              
-              <Route path="/events" element={<Events />} />
-              <Route path="/events/:id" element={<EventDetail />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/instructors" element={<Instructors />} />
-              <Route path="/instructors/:id" element={<InstructorDetail />} />
-              <Route path="/consultations" element={<Consultations />} />
-              <Route path="/challenges" element={<Challenges />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/refund" element={<Refund />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/courses/:id" element={<CourseDetail />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:id" element={<ProjectDetail />} />
+                <Route path="/learning-paths" element={<LearningPaths />} />
+                <Route path="/learning-paths/:id" element={<LearningPathDetail />} />
+                <Route path="/roadmaps" element={<Roadmaps />} />
+                <Route path="/roadmaps/:id" element={<RoadmapDetail />} />
+                <Route path="/interview-prep" element={<InterviewPrep />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/events/:id" element={<EventDetail />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/instructors" element={<Instructors />} />
+                <Route path="/instructors/:id" element={<InstructorDetail />} />
+                <Route path="/consultations" element={<Consultations />} />
+                <Route path="/challenges" element={<Challenges />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/refund" element={<Refund />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
