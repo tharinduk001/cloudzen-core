@@ -12,7 +12,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-dot-grid">
       <Header onSearchOpen={() => setSearchOpen(true)} />
       {!isHome && <Breadcrumbs />}
       <main className="flex-1">{children}</main>
