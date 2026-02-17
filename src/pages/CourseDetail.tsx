@@ -1,37 +1,18 @@
 import { useParams, Link } from "react-router-dom";
-import { BookOpen, Clock, Star, Users, Award, CheckCircle2 } from "lucide-react";
+import { BookOpen, Clock, Star, Users, Award, CheckCircle2, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useCourse, useInstructors, useEnrollInCourse } from "@/hooks/useData";
-import { useAuth } from "@/hooks/useAuth";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { courses, instructors } from "@/data/mock-data";
 
 const CourseDetail = () => {
   const { id } = useParams();
-  const { data: course, isLoading } = useCourse(id);
-  const { data: instructors = [] } = useInstructors();
-  const { user } = useAuth();
-  const enroll = useEnrollInCourse();
-  const navigate = useNavigate();
+  const course = courses.find((c) => c.id === id);
 
-  if (isLoading) return <div className="container py-20 text-center text-muted-foreground">Loading...</div>;
   if (!course) return <div className="container py-20 text-center"><h1 className="text-2xl font-bold">Course not found</h1><Button asChild className="mt-4"><Link to="/courses">Back to Courses</Link></Button></div>;
 
-  const instructor = instructors.find((i: any) => i.id === course.instructor_id);
-
-  const handleEnroll = async () => {
-    if (!user) { navigate("/sign-in"); return; }
-    try {
-      await enroll.mutateAsync(course.id);
-      toast.success("Enrolled successfully!");
-    } catch (e: any) {
-      if (e.message?.includes("duplicate")) toast.info("Already enrolled!");
-      else toast.error(e.message);
-    }
-  };
+  const instructor = instructors.find((i) => i.name === course.instructor);
 
   return (
     <div className="container py-8">
@@ -52,14 +33,20 @@ const CourseDetail = () => {
               <span className="flex items-center gap-1"><Award className="h-4 w-4 text-primary" />{course.badge} badge</span>
             </div>
           </div>
-          <Card><CardContent className="p-6">
-            <h2 className="font-display text-xl font-bold mb-4">What You'll Learn</h2>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {["Core concepts and architecture", "Hands-on implementation skills", "Best practices and patterns", "Real-world project experience", "Interview preparation topics", "Open Badge 3.0 credential"].map((item) => (
-                <div key={item} className="flex items-start gap-2 text-sm"><CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />{item}</div>
-              ))}
-            </div>
-          </CardContent></Card>
+
+          {/* Outcomes */}
+          <Card>
+            <CardContent className="p-6">
+              <h2 className="font-display text-xl font-bold mb-4">What You'll Learn</h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {["Core concepts and architecture", "Hands-on implementation skills", "Best practices and patterns", "Real-world project experience", "Interview preparation topics", "Open Badge 3.0 credential"].map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-sm"><CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />{item}</div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Syllabus */}
           <div>
             <h2 className="font-display text-xl font-bold mb-4">Syllabus</h2>
             <Accordion type="multiple" className="space-y-2">
@@ -77,21 +64,29 @@ const CourseDetail = () => {
               ))}
             </Accordion>
           </div>
+
+          {/* Instructor */}
           {instructor && (
-            <Card><CardContent className="p-6 flex items-start gap-4">
-              <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center shrink-0"><Users className="h-6 w-6 text-muted-foreground" /></div>
-              <div>
-                <h3 className="font-display font-semibold">{instructor.name}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{instructor.title}</p>
-                <p className="text-sm">{instructor.bio}</p>
-              </div>
-            </CardContent></Card>
+            <Card>
+              <CardContent className="p-6 flex items-start gap-4">
+                <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center shrink-0">
+                  <Users className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold">{instructor.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{instructor.title}</p>
+                  <p className="text-sm">{instructor.bio}</p>
+                </div>
+              </CardContent>
+            </Card>
           )}
+
+          {/* FAQ */}
           <div>
             <h2 className="font-display text-xl font-bold mb-4">Frequently Asked Questions</h2>
             <Accordion type="multiple" className="space-y-2">
               {[
-                { q: "Do I need prior experience?", a: `This course is designed for ${course.level?.toLowerCase()} level learners.` },
+                { q: "Do I need prior experience?", a: `This course is designed for ${course.level.toLowerCase()} level learners. Check the prerequisites for details.` },
                 { q: "How long do I have access?", a: "You get lifetime access to all recorded content after enrollment." },
                 { q: "Is there a certificate?", a: "Yes! You'll receive an Open Badge 3.0 compliant digital credential upon completion." },
                 { q: "Can I get a refund?", a: "We offer a 30-day money-back guarantee for premium courses." },
@@ -104,13 +99,19 @@ const CourseDetail = () => {
             </Accordion>
           </div>
         </div>
+
+        {/* Sidebar */}
         <div className="lg:col-span-1">
           <Card className="sticky top-24">
             <CardContent className="p-6 space-y-4">
-              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center"><BookOpen className="h-10 w-10 text-muted-foreground/40" /></div>
-              <div className="text-3xl font-display font-bold">{course.price === 0 ? "Free" : `$${course.price}`}</div>
-              <Button className="w-full gradient-bg text-white border-0" size="lg" onClick={handleEnroll} disabled={enroll.isPending}>
-                {enroll.isPending ? "Enrolling..." : course.price === 0 ? "Enroll for Free" : "Enroll Now"}
+              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                <BookOpen className="h-10 w-10 text-muted-foreground/40" />
+              </div>
+              <div className="text-3xl font-display font-bold">
+                {course.price === "Free" ? "Free" : `$${course.price}`}
+              </div>
+              <Button className="w-full gradient-bg text-white border-0" size="lg">
+                {course.price === "Free" ? "Enroll for Free" : "Enroll Now"}
               </Button>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{course.duration}</span></div>
@@ -119,7 +120,10 @@ const CourseDetail = () => {
                 <div className="flex justify-between"><span className="text-muted-foreground">Students</span><span className="font-medium">{course.students}</span></div>
               </div>
               <div className="border-t border-border pt-4">
-                <div className="flex items-center gap-2 text-sm text-primary"><Award className="h-4 w-4" /><span className="font-medium">Open Badge 3.0 credential on completion</span></div>
+                <div className="flex items-center gap-2 text-sm text-primary">
+                  <Award className="h-4 w-4" />
+                  <span className="font-medium">Open Badge 3.0 credential on completion</span>
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, CheckCircle2, TrendingUp, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useCourses, useProjects, useLearningPaths, useRoadmaps, useTestimonials, useEvents, useBlogPosts } from "@/hooks/useData";
-import { categories } from "@/data/mock-data";
+import { courses, projects, learningPaths, roadmaps, testimonials, events, blogPosts, categories } from "@/data/mock-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -17,14 +16,6 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const Index = () => {
-  const { data: courses = [] } = useCourses();
-  const { data: projects = [] } = useProjects();
-  const { data: learningPaths = [] } = useLearningPaths();
-  const { data: roadmaps = [] } = useRoadmaps();
-  const { data: testimonials = [] } = useTestimonials();
-  const { data: events = [] } = useEvents();
-  const { data: blogPosts = [] } = useBlogPosts();
-
   return (
     <div className="overflow-hidden">
       {/* Hero */}
@@ -54,9 +45,13 @@ const Index = () => {
               </Button>
             </div>
           </motion.div>
+          {/* Trust Indicators */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
             {[{ icon: Award, text: "Open Badge 3.0" }, { icon: Zap, text: "Hands-on Projects" }, { icon: TrendingUp, text: "Career-Focused" }, { icon: Users, text: "5,000+ Students" }].map((item) => (
-              <div key={item.text} className="flex items-center gap-2"><item.icon className="h-4 w-4 text-primary" /><span>{item.text}</span></div>
+              <div key={item.text} className="flex items-center gap-2">
+                <item.icon className="h-4 w-4 text-primary" />
+                <span>{item.text}</span>
+              </div>
             ))}
           </motion.div>
         </div>
@@ -135,7 +130,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {courses.slice(0, 4).map((course: any, i: number) => (
+            {courses.slice(0, 4).map((course, i) => (
               <motion.div key={course.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/courses/${course.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -145,8 +140,8 @@ const Index = () => {
                     <CardContent className="p-4 flex-1 flex flex-col">
                       <div className="flex gap-2 mb-2">
                         <Badge variant="secondary" className="text-sm">{course.category}</Badge>
-                        <Badge variant={course.price === 0 ? "default" : "outline"} className="text-sm">
-                          {course.price === 0 ? "Free" : `$${course.price}`}
+                        <Badge variant={course.price === "Free" ? "default" : "outline"} className="text-sm">
+                          {course.price === "Free" ? "Free" : `$${course.price}`}
                         </Badge>
                       </div>
                       <h3 className="font-display font-semibold text-base mb-1 group-hover:text-primary transition-colors">{course.title}</h3>
@@ -177,7 +172,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.slice(0, 3).map((project: any, i: number) => (
+            {projects.slice(0, 3).map((project, i) => (
               <motion.div key={project.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/projects/${project.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -190,7 +185,7 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground mb-3 line-clamp-2 flex-1">{project.description}</p>
                       <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto">
                         <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{project.duration}</span>
-                        <span>{project.tools?.slice(0, 2).join(", ")}</span>
+                        <span>{project.tools.slice(0, 2).join(", ")}</span>
                       </div>
                     </CardContent>
                   </Card>
@@ -214,7 +209,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {learningPaths.map((path: any, i: number) => (
+            {learningPaths.map((path, i) => (
               <motion.div key={path.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/learning-paths/${path.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -245,7 +240,7 @@ const Index = () => {
             <p className="text-muted-foreground">Visual guides to your dream tech role.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {roadmaps.map((rm: any, i: number) => (
+            {roadmaps.map((rm, i) => (
               <motion.div key={rm.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/roadmaps/${rm.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -272,8 +267,8 @@ const Index = () => {
             <p className="text-muted-foreground">Hear from our community of learners.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {testimonials.map((t: any, i: number) => (
-              <motion.div key={t.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
+            {testimonials.map((t, i) => (
+              <motion.div key={t.name} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Card className="h-full flex flex-col">
                   <CardContent className="p-5 flex-1 flex flex-col">
                     <div className="flex items-center gap-1 mb-3">
@@ -308,7 +303,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
-            {events.filter((e: any) => !e.is_past).map((event: any, i: number) => (
+            {events.filter((e) => !e.isPast).map((event, i) => (
               <motion.div key={event.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/events/${event.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -341,7 +336,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.slice(0, 3).map((post: any, i: number) => (
+            {blogPosts.slice(0, 3).map((post, i) => (
               <motion.div key={post.id} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
                 <Link to={`/blog/${post.id}`} className="block h-full">
                   <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -354,7 +349,7 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground mb-2 line-clamp-2 flex-1">{post.excerpt}</p>
                       <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto">
                         <span>{post.author}</span>
-                        <span>{post.read_time}</span>
+                        <span>{post.readTime}</span>
                       </div>
                     </CardContent>
                   </Card>
