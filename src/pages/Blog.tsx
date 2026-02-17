@@ -6,19 +6,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { blogPosts } from "@/data/mock-data";
-
-const allCategories = [...new Set(blogPosts.map((b) => b.category))];
+import { useBlogPosts } from "@/hooks/useData";
 
 const Blog = () => {
+  const { data: blogPosts = [], isLoading } = useBlogPosts();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
 
-  const filtered = blogPosts.filter((b) => {
+  const allCategories = [...new Set(blogPosts.map((b: any) => b.category).filter(Boolean))];
+
+  const filtered = blogPosts.filter((b: any) => {
     const matchSearch = !search || b.title.toLowerCase().includes(search.toLowerCase());
     const matchCat = category === "all" || b.category === category;
     return matchSearch && matchCat;
   });
+
+  if (isLoading) return <div className="container py-20 text-center text-muted-foreground">Loading...</div>;
 
   return (
     <div className="container py-8">
@@ -35,12 +38,12 @@ const Blog = () => {
           <SelectTrigger className="w-[160px]"><SelectValue placeholder="Category" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Categories</SelectItem>
-            {allCategories.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+            {allCategories.map((c: any) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((post, i) => (
+        {filtered.map((post: any, i: number) => (
           <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
             <Link to={`/blog/${post.id}`}>
               <Card className="hover-glow hover:border-primary/30 transition-all group h-full">
@@ -54,7 +57,7 @@ const Blog = () => {
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{post.author}</span>
                     <span>{post.date}</span>
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.readTime}</span>
+                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.read_time}</span>
                   </div>
                 </CardContent>
               </Card>

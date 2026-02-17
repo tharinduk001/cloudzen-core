@@ -1,24 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpen, Clock, Star, Search, Filter } from "lucide-react";
+import { BookOpen, Clock, Star, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { courses } from "@/data/mock-data";
+import { useCourses } from "@/hooks/useData";
 
 const Courses = () => {
+  const { data: courses = [], isLoading } = useCourses();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [level, setLevel] = useState("all");
 
   const filterCourses = (type: string) => {
-    return courses.filter((c) => {
+    return courses.filter((c: any) => {
       const matchType = type === "all" || c.type === type;
-      const matchSearch = !search || c.title.toLowerCase().includes(search.toLowerCase()) || c.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
+      const matchSearch = !search || c.title.toLowerCase().includes(search.toLowerCase()) || c.tags?.some((t: string) => t.toLowerCase().includes(search.toLowerCase()));
       const matchCategory = category === "all" || c.category === category;
       const matchLevel = level === "all" || c.level === level;
       return matchType && matchSearch && matchCategory && matchLevel;
@@ -27,10 +28,11 @@ const Courses = () => {
 
   const CourseGrid = ({ type }: { type: string }) => {
     const filtered = filterCourses(type);
+    if (isLoading) return <p className="text-muted-foreground text-center py-12">Loading courses...</p>;
     return (
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
         {filtered.length === 0 && <p className="text-muted-foreground col-span-full text-center py-12">No courses found.</p>}
-        {filtered.map((course, i) => (
+        {filtered.map((course: any, i: number) => (
           <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="h-full">
             <Link to={`/courses/${course.id}`} className="block h-full">
               <Card className="hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
@@ -41,8 +43,8 @@ const Courses = () => {
                   <div className="flex gap-2 mb-2 flex-wrap">
                     <Badge variant="secondary" className="text-sm">{course.category}</Badge>
                     <Badge variant="outline" className="text-sm">{course.level}</Badge>
-                    <Badge variant={course.price === "Free" ? "default" : "outline"} className="text-sm">
-                      {course.price === "Free" ? "Free" : `$${course.price}`}
+                    <Badge variant={course.price === 0 ? "default" : "outline"} className="text-sm">
+                      {course.price === 0 ? "Free" : `$${course.price}`}
                     </Badge>
                   </div>
                   <h3 className="font-display font-semibold text-base mb-1 group-hover:text-primary transition-colors">{course.title}</h3>
@@ -67,8 +69,6 @@ const Courses = () => {
         <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Courses</h1>
         <p className="text-muted-foreground">Explore our catalog of cloud, DevOps, and software engineering courses.</p>
       </div>
-
-      {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-6">
         <div className="relative flex-1 min-w-[200px] max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -93,7 +93,6 @@ const Courses = () => {
           </SelectContent>
         </Select>
       </div>
-
       <Tabs defaultValue="all">
         <TabsList>
           <TabsTrigger value="all">All</TabsTrigger>
