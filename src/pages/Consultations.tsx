@@ -9,7 +9,7 @@ const Consultations = () => {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Consultations</h1>
+        <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Contact Us</h1>
         <p className="text-muted-foreground">Get personalized guidance from our expert instructors.</p>
       </div>
 
