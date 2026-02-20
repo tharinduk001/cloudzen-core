@@ -12,7 +12,6 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import LearningPaths from "./pages/LearningPaths";
 import LearningPathDetail from "./pages/LearningPathDetail";
-import Roadmaps from "./pages/Roadmaps";
 import RoadmapDetail from "./pages/RoadmapDetail";
 import InterviewPrep from "./pages/InterviewPrep";
 
@@ -49,7 +48,7 @@ const App = () => (
               <Route path="/projects/:id" element={<ProjectDetail />} />
               <Route path="/learning-paths" element={<LearningPaths />} />
               <Route path="/learning-paths/:id" element={<LearningPathDetail />} />
-              <Route path="/roadmaps" element={<Roadmaps />} />
+              <Route path="/roadmaps" element={<LearningPaths />} />
               <Route path="/roadmaps/:id" element={<RoadmapDetail />} />
               <Route path="/interview-prep" element={<InterviewPrep />} />
               
