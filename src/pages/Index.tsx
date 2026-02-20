@@ -245,7 +245,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button size="lg" variant="secondary" className="text-base px-8" asChild>
-                  <Link to="/consultations">Request Consultation</Link>
+                  <Link to="/consultations">Contact Us</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="text-base px-8 border-white/40 bg-white/15 text-white hover:bg-white/25" asChild>
                   <Link to="/learning-paths">Browse Paths</Link>
