@@ -19,6 +19,7 @@ const moreNav = [
   { label: "Contact Us", path: "/consultations" },
   { label: "Interview Prep", path: "/interview-prep", comingSoon: true },
   { label: "Challenges", path: "/challenges", comingSoon: true },
+  { label: "Roadmaps", path: "/roadmaps", comingSoon: true },
 ];
 
 const allNavItems = [...primaryNav, ...moreNav];
