@@ -5,10 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Calendar, MessageSquare, FileText, Target, Compass, Code } from "lucide-react";
+import { Calendar, MessageSquare, FileText, Target, Code } from "lucide-react";
 
 const services = [
-  { icon: Compass, title: "Career Guidance", desc: "Get personalized advice on your tech career path." },
   { icon: Target, title: "Cloud Roadmap", desc: "Custom learning plan for cloud certifications." },
   { icon: FileText, title: "CV Review", desc: "Expert review of your technical resume." },
   { icon: MessageSquare, title: "Mock Interviews", desc: "Practice with real interview scenarios." },
