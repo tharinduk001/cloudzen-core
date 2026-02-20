@@ -10,9 +10,6 @@ import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
-import LearningPaths from "./pages/LearningPaths";
-import LearningPathDetail from "./pages/LearningPathDetail";
-import RoadmapDetail from "./pages/RoadmapDetail";
 import InterviewPrep from "./pages/InterviewPrep";
 
 import Events from "./pages/Events";
@@ -46,10 +43,6 @@ const App = () => (
               <Route path="/courses/:id" element={<CourseDetail />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/learning-paths" element={<LearningPaths />} />
-              <Route path="/learning-paths/:id" element={<LearningPathDetail />} />
-              <Route path="/roadmaps" element={<LearningPaths />} />
-              <Route path="/roadmaps/:id" element={<RoadmapDetail />} />
               <Route path="/interview-prep" element={<InterviewPrep />} />
               
               <Route path="/events" element={<Events />} />
