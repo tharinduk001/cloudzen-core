@@ -6,7 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
-const primaryNav = [
+const primaryNav: { label: string; path: string; comingSoon?: boolean }[] = [
   { label: "About", path: "/about" },
   { label: "Courses", path: "/courses" },
   { label: "Instructors", path: "/instructors" },
@@ -16,10 +16,9 @@ const primaryNav = [
 ];
 
 const moreNav = [
-  { label: "Interview Prep", path: "/interview-prep" },
-  
+  { label: "Interview Prep", path: "/interview-prep", comingSoon: true },
   { label: "Consultations", path: "/consultations" },
-  { label: "Challenges", path: "/challenges" },
+  { label: "Challenges", path: "/challenges", comingSoon: true },
 ];
 
 const allNavItems = [...primaryNav, ...moreNav];
@@ -82,21 +81,31 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
             </button>
             {moreOpen && (
               <div className="absolute top-full right-0 mt-1 w-56 rounded-lg border border-border bg-popover p-1 shadow-lg animate-in fade-in-0 zoom-in-95">
-                {moreNav.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setMoreOpen(false)}
-                    className={cn(
-                      "block px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted",
-                      location.pathname === item.path
-                        ? "text-primary bg-primary/5"
-                        : "text-muted-foreground"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {moreNav.map((item) =>
+                  item.comingSoon ? (
+                    <span
+                      key={item.path}
+                      className="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md text-muted-foreground/50 cursor-not-allowed"
+                    >
+                      {item.label}
+                      <span className="text-[10px] uppercase tracking-wider bg-muted px-1.5 py-0.5 rounded">Soon</span>
+                    </span>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setMoreOpen(false)}
+                      className={cn(
+                        "block px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted",
+                        location.pathname === item.path
+                          ? "text-primary bg-primary/5"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             )}
           </div>
@@ -128,21 +137,31 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
                   <Search className="h-5 w-5" />
                   <span className="ml-2">Search</span>
                 </Button>
-                {allNavItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "px-4 py-3 text-sm font-medium rounded-lg transition-colors",
-                      location.pathname === item.path
-                        ? "bg-primary/10 text-primary"
-                        : "hover:bg-muted"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {allNavItems.map((item) =>
+                  item.comingSoon ? (
+                    <span
+                      key={item.path}
+                      className="flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-muted-foreground/50 cursor-not-allowed"
+                    >
+                      {item.label}
+                      <span className="text-[10px] uppercase tracking-wider bg-muted px-1.5 py-0.5 rounded">Soon</span>
+                    </span>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "px-4 py-3 text-sm font-medium rounded-lg transition-colors",
+                        location.pathname === item.path
+                          ? "bg-primary/10 text-primary"
+                          : "hover:bg-muted"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
                 <div className="border-t border-border mt-4 pt-4 flex flex-col gap-2">
                   <Button variant="outline" asChild>
                     <Link to="/sign-in" onClick={() => setMobileOpen(false)}>Sign In</Link>
