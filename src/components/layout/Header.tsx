@@ -16,8 +16,8 @@ const primaryNav: { label: string; path: string; comingSoon?: boolean }[] = [
 ];
 
 const moreNav = [
+  { label: "Contact Us", path: "/consultations" },
   { label: "Interview Prep", path: "/interview-prep", comingSoon: true },
-  { label: "Consultations", path: "/consultations" },
   { label: "Challenges", path: "/challenges", comingSoon: true },
 ];
 
