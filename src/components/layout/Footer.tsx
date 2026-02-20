@@ -7,7 +7,6 @@ const footerLinks = {
   Platform: [
     { label: "Courses", path: "/courses" },
     { label: "Projects", path: "/projects" },
-    { label: "Paths & Roadmaps", path: "/learning-paths" },
     { label: "Challenges", path: "/challenges" },
   ],
   Resources: [
