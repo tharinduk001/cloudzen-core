@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Noto Serif JP", "serif"],
+        display: ["Yaldevi", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
