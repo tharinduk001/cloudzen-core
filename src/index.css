@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -115,8 +115,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 500;
+    font-family: 'Yaldevi', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
 }
 
@@ -191,5 +192,75 @@
   .dark .bg-dot-grid {
     background-image: radial-gradient(circle, hsl(210 90% 58% / 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  /* Sri Lankan Kandyan-inspired lotus petal border pattern */
+  .border-kandyan {
+    border-image: repeating-linear-gradient(
+      90deg,
+      hsl(210 85% 55% / 0.3) 0px,
+      hsl(190 75% 48% / 0.2) 4px,
+      transparent 4px,
+      transparent 8px,
+      hsl(210 85% 55% / 0.15) 8px,
+      hsl(210 85% 55% / 0.15) 10px,
+      transparent 10px,
+      transparent 16px
+    ) 1;
+  }
+
+  .dark .border-kandyan {
+    border-image: repeating-linear-gradient(
+      90deg,
+      hsl(210 90% 58% / 0.35) 0px,
+      hsl(190 80% 52% / 0.25) 4px,
+      transparent 4px,
+      transparent 8px,
+      hsl(210 90% 58% / 0.18) 8px,
+      hsl(210 90% 58% / 0.18) 10px,
+      transparent 10px,
+      transparent 16px
+    ) 1;
+  }
+
+  /* Sri Lankan-inspired lotus motif background */
+  .bg-lotus-motif {
+    background-image: 
+      radial-gradient(ellipse 12px 18px at 24px 24px, hsl(210 85% 55% / 0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 18px 12px at 24px 24px, hsl(190 75% 48% / 0.03) 0%, transparent 70%),
+      radial-gradient(circle 3px at 24px 24px, hsl(210 85% 55% / 0.08) 0%, transparent 100%);
+    background-size: 48px 48px;
+  }
+
+  .dark .bg-lotus-motif {
+    background-image: 
+      radial-gradient(ellipse 12px 18px at 24px 24px, hsl(210 90% 58% / 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 18px 12px at 24px 24px, hsl(190 80% 52% / 0.04) 0%, transparent 70%),
+      radial-gradient(circle 3px at 24px 24px, hsl(210 90% 58% / 0.1) 0%, transparent 100%);
+    background-size: 48px 48px;
+  }
+
+  /* Kandyan wave divider */
+  .divider-kandyan {
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      hsl(210 85% 55% / 0.3) 8px,
+      hsl(190 75% 48% / 0.2) 16px,
+      transparent 24px,
+      transparent 32px
+    );
+  }
+
+  .dark .divider-kandyan {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      hsl(210 90% 58% / 0.35) 8px,
+      hsl(190 80% 52% / 0.25) 16px,
+      transparent 24px,
+      transparent 32px
+    );
   }
 }
