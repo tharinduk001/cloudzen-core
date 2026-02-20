@@ -16,8 +16,7 @@ const primaryNav = [
 ];
 
 const moreNav = [
-  { label: "Learning Paths", path: "/learning-paths" },
-  { label: "Roadmaps", path: "/roadmaps" },
+  { label: "Paths & Roadmaps", path: "/learning-paths" },
   { label: "Interview Prep", path: "/interview-prep" },
   
   { label: "Consultations", path: "/consultations" },
