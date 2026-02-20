@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <section className="relative py-20 md:py-32 gradient-bg-subtle bg-lotus-motif overflow-hidden">
+      <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-float" />
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
@@ -57,9 +57,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Kandyan divider */}
-      <div className="divider-kandyan mx-auto max-w-4xl" />
-
       {/* Categories */}
       <section className="py-20">
         <div className="container">
@@ -91,7 +88,7 @@ const Index = () => {
       </section>
 
       {/* How it Works */}
-      <section className="py-20 gradient-bg-subtle bg-lotus-motif">
+      <section className="py-20 gradient-bg-subtle bg-grid-fine">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">How CloudZen Works</h2>
@@ -163,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Projects Spotlight */}
-      <section className="py-20 gradient-bg-subtle bg-lotus-motif">
+      <section className="py-20 gradient-bg-subtle bg-grid-fine">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -236,7 +233,7 @@ const Index = () => {
       </section>
 
       {/* Roadmaps */}
-      <section className="py-20 gradient-bg-subtle bg-lotus-motif">
+      <section className="py-20 gradient-bg-subtle bg-grid-fine">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Career Roadmaps</h2>
@@ -294,7 +291,7 @@ const Index = () => {
       </section>
 
       {/* Events */}
-      <section className="py-20 gradient-bg-subtle bg-lotus-motif">
+      <section className="py-20 gradient-bg-subtle bg-grid-fine">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
