@@ -58,7 +58,7 @@ const Index = () => {
       </section>
 
       {/* Categories */}
-      <section className="py-20">
+      <section className="py-20 bg-grid">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Explore by Category</h2>
@@ -88,7 +88,7 @@ const Index = () => {
       </section>
 
       {/* How it Works */}
-      <section className="py-20 gradient-bg-subtle bg-grid-fine">
+      <section className="py-20 gradient-bg-subtle bg-grid">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">How CloudZen Works</h2>
@@ -118,7 +118,7 @@ const Index = () => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20">
+      <section className="py-20 bg-grid">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Projects Spotlight */}
-      <section className="py-20 gradient-bg-subtle bg-grid-fine">
+      <section className="py-20 gradient-bg-subtle bg-grid">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -200,7 +200,7 @@ const Index = () => {
 
 
       {/* Testimonials */}
-      <section className="py-20">
+      <section className="py-20 bg-grid">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">What Students Say</h2>
@@ -234,7 +234,7 @@ const Index = () => {
 
 
       {/* CTA Banner */}
-      <section className="py-20">
+      <section className="py-20 bg-grid">
         <div className="container">
           <Card className="gradient-bg border-0 overflow-hidden relative">
             <div className="absolute inset-0 bg-black/10" />
