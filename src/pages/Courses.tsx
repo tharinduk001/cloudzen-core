@@ -107,39 +107,40 @@ const Courses = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="rounded-xl gradient-bg p-5 md:p-6 text-white mb-8"
+        className="rounded-xl gradient-bg px-4 py-3 text-white mb-8 overflow-hidden"
       >
-        <div className="flex flex-col md:flex-row md:items-center gap-5">
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="p-2.5 bg-white/20 rounded-lg">
-              <Award className="h-6 w-6" />
+        <div className="flex items-center gap-4 flex-nowrap overflow-x-auto scrollbar-none">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="p-2 bg-white/20 rounded-lg">
+              <Award className="h-5 w-5" />
             </div>
-            <div>
-              <h3 className="font-display font-bold text-lg leading-tight">Open Badge 3.0 Certified</h3>
-              <p className="text-white/70 text-xs">Globally Recognized Digital Credentials</p>
-            </div>
+            <span className="font-display font-bold text-sm whitespace-nowrap">Open Badge 3.0</span>
           </div>
 
-          <p className="text-sm text-white/85 leading-relaxed md:flex-1">
-            Every course completion earns you a <strong>verified digital credential</strong> compliant with the Open Badge 3.0 standard — recognized by employers and institutions worldwide.
+          <span className="hidden sm:inline text-white/40">|</span>
+
+          <p className="text-xs text-white/80 shrink-0 whitespace-nowrap hidden sm:block">
+            Earn <strong>verified digital credentials</strong> with every course
           </p>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 shrink-0">
+          <span className="hidden md:inline text-white/40">|</span>
+
+          <div className="hidden md:flex items-center gap-3 shrink-0">
             {[
               { icon: ShieldCheck, text: "Verifiable" },
               { icon: Globe, text: "Global" },
               { icon: CheckCircle, text: "Shareable" },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-1.5">
+              <div key={text} className="flex items-center gap-1">
                 <Icon className="h-3.5 w-3.5 text-white/90" />
-                <span className="text-xs text-white/80 font-medium">{text}</span>
+                <span className="text-xs text-white/80">{text}</span>
               </div>
             ))}
           </div>
 
-          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white/10 hover:bg-white/15 transition-colors rounded-lg px-4 py-2 text-center">
-            <p className="text-[10px] text-white/50">Powered by</p>
-            <p className="font-display font-bold text-xs">CertDirectory</p>
+          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="ml-auto shrink-0 bg-white/10 hover:bg-white/15 transition-colors rounded-md px-3 py-1.5 text-center">
+            <p className="text-[9px] text-white/50 leading-tight">Powered by</p>
+            <p className="font-display font-bold text-[11px] leading-tight">CertDirectory</p>
           </a>
         </div>
       </motion.div>
