@@ -1,5 +1,6 @@
 import { Award, Target, Eye, Linkedin, Twitter, Github } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const teamMembers = [
@@ -35,6 +36,8 @@ const About = () => (
       </Card>
     </div>
 
+    <Separator className="mb-16" />
+
     {/* Founder's Message */}
     <div className="mb-16">
       <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Our Founder</h2>
@@ -58,6 +61,8 @@ const About = () => (
         </div>
       </div>
     </div>
+
+    <Separator className="mb-16" />
 
     {/* Team Members */}
     <div className="mb-16">
@@ -86,6 +91,8 @@ const About = () => (
         ))}
       </div>
     </div>
+
+    <Separator className="mb-16" />
 
     {/* Open Badge */}
     <div className="gradient-bg-subtle rounded-2xl p-8 text-center">
