@@ -1,52 +1,86 @@
-import { motion } from "framer-motion";
-import { Radio, BarChart3, Zap, Award, Code, TrendingUp, Gamepad2, Target } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Radio, BarChart3, Zap, Award, Gamepad2, Target } from "lucide-react";
+import { useRef, MouseEvent } from "react";
 
 const benefits = [
-  { icon: Radio, label: "Live Exams", desc: "Compete in real-time exams", color: "from-blue-500/20 to-cyan-500/20" },
-  { icon: BarChart3, label: "Ranking System", desc: "See where you stand", color: "from-purple-500/20 to-pink-500/20" },
-  { icon: Zap, label: "Instant Marking", desc: "Get results immediately", color: "from-amber-500/20 to-orange-500/20" },
-  { icon: Award, label: "Digital Badges", desc: "Open Badge 3.0 certified", color: "from-emerald-500/20 to-teal-500/20" },
-  { icon: Gamepad2, label: "Gamified Learning", desc: "Earn XP & level up", color: "from-rose-500/20 to-red-500/20" },
-  { icon: Target, label: "Career Paths", desc: "Clear roadmap to jobs", color: "from-indigo-500/20 to-violet-500/20" },
+  { icon: Radio, label: "Live Exams", desc: "Compete in real-time exams", color: "from-blue-500 to-cyan-400" },
+  { icon: BarChart3, label: "Ranking System", desc: "See where you stand", color: "from-violet-500 to-purple-400" },
+  { icon: Zap, label: "Instant Marking", desc: "Get results immediately", color: "from-amber-500 to-orange-400" },
+  { icon: Award, label: "Digital Badges", desc: "Open Badge 3.0 certified", color: "from-emerald-500 to-teal-400" },
+  { icon: Gamepad2, label: "Gamified Learning", desc: "Earn XP & level up", color: "from-rose-500 to-pink-400" },
+  { icon: Target, label: "Career Paths", desc: "Clear roadmap to jobs", color: "from-indigo-500 to-blue-400" },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { delay: i * 0.08, duration: 0.4, ease: "easeOut" as const },
-  }),
+const TiltCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const brightness = useTransform(rotateY, [-15, 0, 15], [0.95, 1, 1.05]);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    rotateX.set((-y / rect.height) * 20);
+    rotateY.set((x / rect.width) * 20);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      style={{ perspective: "800px" }}
+    >
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        whileHover={{ translateZ: 20 }}
+        className="p-8 rounded-2xl border border-border/40 bg-card/80 backdrop-blur-sm cursor-default flex flex-col items-center text-center gap-4 hover-glow transition-shadow"
+      >
+        <motion.div
+          style={{ filter: useTransform(brightness, (b) => `brightness(${b})`) }}
+          className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center shadow-lg`}
+        >
+          <benefit.icon className="h-7 w-7 text-white" />
+        </motion.div>
+        <h3 className="font-display font-bold text-xl">{benefit.label}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
+      </motion.div>
+    </motion.div>
+  );
 };
 
 const BenefitsStrip = () => {
   return (
-    <section className="py-20 bg-grid">
-      <div className="container">
+    <section className="min-h-screen snap-start relative flex items-center overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-30" />
+      <div className="absolute inset-0 gradient-bg-subtle" />
+
+      <div className="container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">Why Students Choose Us</h2>
-          <p className="text-muted-foreground max-w-lg mx-auto text-lg">Everything you need to learn, prove, and grow.</p>
+          <h2 className="font-display text-5xl lg:text-6xl font-bold mb-4">Why Students Choose Us</h2>
+          <p className="text-xl text-muted-foreground">Everything you need to learn, prove, and grow.</p>
         </motion.div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+
+        <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto">
           {benefits.map((b, i) => (
-            <motion.div key={b.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <Card className="text-center hover:scale-105 hover:-translate-y-1 transition-all duration-300 hover-glow border-border/50 h-full cursor-default group">
-                <CardContent className="pt-6 pb-5 flex flex-col items-center gap-3">
-                  <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${b.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <b.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <h3 className="font-display font-semibold text-sm">{b.label}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{b.desc}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <TiltCard key={b.label} benefit={b} index={i} />
           ))}
         </div>
       </div>

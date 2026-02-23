@@ -8,7 +8,7 @@ import FinalCTA from "@/components/home/FinalCTA";
 
 const Index = () => {
   return (
-    <div className="overflow-hidden">
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory">
       <HeroSection />
       <BenefitsStrip />
       <LearningRoadmap />
