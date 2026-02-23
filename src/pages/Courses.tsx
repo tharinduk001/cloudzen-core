@@ -107,8 +107,11 @@ const Courses = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="rounded-xl gradient-bg px-4 py-3 text-white mb-8 overflow-hidden"
+        className="rounded-xl gradient-bg px-4 py-3 text-white mb-8 overflow-hidden space-y-2"
       >
+        <p className="text-sm font-semibold tracking-wide text-white">
+          Earn <span className="bg-white/20 px-1.5 py-0.5 rounded">verified digital credentials</span> with every course
+        </p>
         <div className="flex items-center gap-4 flex-nowrap overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-2 shrink-0">
             <div className="p-2 bg-white/20 rounded-lg">
@@ -116,12 +119,6 @@ const Courses = () => {
             </div>
             <span className="font-display font-bold text-sm whitespace-nowrap">Open Badge 3.0</span>
           </div>
-
-          <span className="hidden sm:inline text-white/40">|</span>
-
-          <p className="text-xs text-white/80 shrink-0 whitespace-nowrap hidden sm:block">
-            Earn <strong>verified digital credentials</strong> with every course
-          </p>
 
           <span className="hidden md:inline text-white/40">|</span>
 
