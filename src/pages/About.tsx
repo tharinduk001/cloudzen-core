@@ -17,6 +17,7 @@ const About = () => (
     </div>
 
     {/* Mission & Vision */}
+    <p className="text-muted-foreground mb-6">What drives us every day — our purpose and the future we're building together.</p>
     <div className="grid md:grid-cols-2 gap-6 mb-16">
       <Card>
         <CardContent className="p-6">
