@@ -11,12 +11,11 @@ const footerLinks = {
   Resources: [
     { label: "Blog", path: "/blog" },
     { label: "Events", path: "/events" },
-    { label: "Contact Us", path: "/consultations" },
   ],
   Company: [
     { label: "About", path: "/about" },
     { label: "Instructors", path: "/instructors" },
-    { label: "Contact", path: "/contact" },
+    { label: "Contact Us", path: "/consultations" },
   ],
   Legal: [
     { label: "Terms & Conditions", path: "/terms" },
