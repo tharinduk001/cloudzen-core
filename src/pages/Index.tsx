@@ -30,8 +30,8 @@ const Index = () => {
               <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
             </Badge>
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              Master Cloud & DevOps.{" "}
-              <span className="gradient-text">Build Real Skills.</span>
+               Advanced Skills.{" "}
+               <span className="gradient-text">Simplified Learning.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
