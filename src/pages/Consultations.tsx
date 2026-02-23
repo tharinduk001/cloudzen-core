@@ -40,24 +40,41 @@ const faqs = [
 
 const Consultations = () => {
   return (
-    <div className="container py-8">
-      <div className="mb-8">
-        <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Contact Us</h1>
-        <p className="text-muted-foreground">Get personalized guidance from our expert instructors.</p>
+    <div className="container py-12 space-y-16">
+      {/* Page Header */}
+      <div className="text-center max-w-2xl mx-auto">
+        <h1 className="font-display text-3xl md:text-4xl font-bold mb-3">Contact Us</h1>
+        <p className="text-muted-foreground text-lg">Get personalized guidance from our expert instructors.</p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      {/* Form & Calendar Section */}
+      <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <Card>
           <CardContent className="p-6">
             <h2 className="font-display text-xl font-bold mb-4">Request a Call</h2>
             <form className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
-                <div><Label htmlFor="name">Name</Label><Input id="name" placeholder="Your name" /></div>
-                <div><Label htmlFor="email">Email</Label><Input id="email" type="email" placeholder="your@email.com" /></div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" placeholder="Your name" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="your@email.com" />
+                </div>
               </div>
-              <div><Label htmlFor="role">Current Role / Goal</Label><Input id="role" placeholder="e.g. Student, Junior Dev" /></div>
-              <div><Label htmlFor="time">Preferred Time</Label><Input id="time" placeholder="e.g. Weekdays 6-8 PM" /></div>
-              <div><Label htmlFor="message">Message</Label><Textarea id="message" placeholder="Tell us about your goals..." rows={4} /></div>
+              <div className="space-y-1.5">
+                <Label htmlFor="role">Current Role / Goal</Label>
+                <Input id="role" placeholder="e.g. Student, Junior Dev" />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="time">Preferred Time</Label>
+                <Input id="time" placeholder="e.g. Weekdays 6-8 PM" />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="message">Message</Label>
+                <Textarea id="message" placeholder="Tell us about your goals..." rows={4} />
+              </div>
               <Button className="w-full gradient-bg text-white border-0">Submit Request</Button>
             </form>
           </CardContent>
@@ -75,9 +92,12 @@ const Consultations = () => {
         </Card>
       </div>
 
-      <div className="mt-16 max-w-2xl mx-auto">
-        <h2 className="font-display text-2xl md:text-3xl font-bold mb-2 text-center">Frequently Asked Questions</h2>
-        <p className="text-muted-foreground mb-8 text-center">Find answers to common questions about our platform and courses.</p>
+      {/* FAQ Section */}
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">Frequently Asked Questions</h2>
+          <p className="text-muted-foreground">Find answers to common questions about our platform and courses.</p>
+        </div>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`faq-${index}`}>
