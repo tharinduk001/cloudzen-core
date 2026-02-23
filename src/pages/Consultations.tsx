@@ -4,6 +4,39 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const faqs = [
+  {
+    question: "What topics do your courses cover?",
+    answer: "Our courses cover a wide range of Cloud & DevOps topics including AWS, Azure, GCP, Docker, Kubernetes, Terraform, CI/CD pipelines, Linux administration, and more.",
+  },
+  {
+    question: "Are the courses suitable for beginners?",
+    answer: "Yes! We offer courses for all skill levels — from absolute beginners to advanced practitioners. Each course clearly indicates the difficulty level so you can choose the right one.",
+  },
+  {
+    question: "How do I access the course materials?",
+    answer: "Once enrolled, you can access all course materials directly through our platform. Recorded courses are available on-demand, and live workshops are scheduled at specific times.",
+  },
+  {
+    question: "Do you offer certificates upon completion?",
+    answer: "Yes, upon successfully completing a course you will receive a verifiable digital certificate that you can share on LinkedIn and other professional platforms.",
+  },
+  {
+    question: "What is your refund policy?",
+    answer: "We offer a hassle-free refund policy. If you're not satisfied with a course, you can request a refund within 7 days of purchase. Please visit our Refund & Returns page for full details.",
+  },
+  {
+    question: "How can I contact support?",
+    answer: "You can reach us by filling out the contact form on this page, or email us directly. We typically respond within 24 hours on business days.",
+  },
+];
 
 const Consultations = () => {
   return (
@@ -40,6 +73,23 @@ const Consultations = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <div className="mt-16">
+        <h2 className="font-display text-2xl md:text-3xl font-bold mb-2">Frequently Asked Questions</h2>
+        <p className="text-muted-foreground mb-8">Find answers to common questions about our platform and courses.</p>
+        <Accordion type="single" collapsible className="w-full max-w-3xl">
+          {faqs.map((faq, index) => (
+            <AccordionItem key={index} value={`faq-${index}`}>
+              <AccordionTrigger className="text-left font-medium">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </div>
   );
