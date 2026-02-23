@@ -75,9 +75,9 @@ const Consultations = () => {
         </Card>
       </div>
 
-      <div className="mt-16">
-        <h2 className="font-display text-2xl md:text-3xl font-bold mb-2">Frequently Asked Questions</h2>
-        <p className="text-muted-foreground mb-8">Find answers to common questions about our platform and courses.</p>
+      <div className="mt-16 max-w-2xl mx-auto">
+        <h2 className="font-display text-2xl md:text-3xl font-bold mb-2 text-center">Frequently Asked Questions</h2>
+        <p className="text-muted-foreground mb-8 text-center">Find answers to common questions about our platform and courses.</p>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`faq-${index}`}>
