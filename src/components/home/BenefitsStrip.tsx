@@ -3,12 +3,12 @@ import { Radio, BarChart3, Zap, Award, Gamepad2, Target } from "lucide-react";
 import { useRef, MouseEvent } from "react";
 
 const benefits = [
-  { icon: Radio, label: "Live Exams", desc: "Compete in real-time exams", color: "from-blue-500 to-cyan-400" },
-  { icon: BarChart3, label: "Ranking System", desc: "See where you stand", color: "from-violet-500 to-purple-400" },
-  { icon: Zap, label: "Instant Marking", desc: "Get results immediately", color: "from-amber-500 to-orange-400" },
-  { icon: Award, label: "Digital Badges", desc: "Open Badge 3.0 certified", color: "from-emerald-500 to-teal-400" },
-  { icon: Gamepad2, label: "Gamified Learning", desc: "Earn XP & level up", color: "from-rose-500 to-pink-400" },
-  { icon: Target, label: "Career Paths", desc: "Clear roadmap to jobs", color: "from-indigo-500 to-blue-400" },
+  { icon: Radio, label: "Live Exams", desc: "Compete in real-time exams with instant ranking", color: "from-blue-500 to-cyan-400" },
+  { icon: BarChart3, label: "Ranking System", desc: "See where you stand among peers", color: "from-violet-500 to-purple-400" },
+  { icon: Zap, label: "Instant Marking", desc: "Get results immediately after submission", color: "from-amber-500 to-orange-400" },
+  { icon: Award, label: "Digital Badges", desc: "Open Badge 3.0 certified credentials", color: "from-emerald-500 to-teal-400" },
+  { icon: Gamepad2, label: "Gamified Learning", desc: "Earn XP & level up as you learn", color: "from-rose-500 to-pink-400" },
+  { icon: Target, label: "Career Paths", desc: "Clear roadmap to land your dream job", color: "from-indigo-500 to-blue-400" },
 ];
 
 const TiltCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: number }) => {
@@ -46,16 +46,16 @@ const TiltCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: numb
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         whileHover={{ translateZ: 20 }}
-        className="p-8 rounded-2xl border border-border/40 bg-card/80 backdrop-blur-sm cursor-default flex flex-col items-center text-center gap-4 hover-glow transition-shadow"
+        className="p-10 rounded-2xl border border-border/40 bg-card/80 backdrop-blur-sm cursor-default flex flex-col items-center text-center gap-5 hover-glow transition-shadow"
       >
         <motion.div
           style={{ filter: useTransform(brightness, (b) => `brightness(${b})`) }}
-          className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center shadow-lg`}
+          className={`h-20 w-20 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center shadow-lg`}
         >
-          <benefit.icon className="h-7 w-7 text-white" />
+          <benefit.icon className="h-9 w-9 text-white" />
         </motion.div>
-        <h3 className="font-display font-bold text-xl">{benefit.label}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
+        <h3 className="font-display font-bold text-2xl">{benefit.label}</h3>
+        <p className="text-base text-muted-foreground leading-relaxed">{benefit.desc}</p>
       </motion.div>
     </motion.div>
   );
@@ -72,13 +72,13 @@ const BenefitsStrip = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl lg:text-6xl font-bold mb-4">Why Students Choose Us</h2>
-          <p className="text-xl text-muted-foreground">Everything you need to learn, prove, and grow.</p>
+          <h2 className="font-display text-6xl lg:text-7xl font-bold mb-6">Why Students Choose Us</h2>
+          <p className="text-2xl text-muted-foreground">Everything you need to learn, prove, and grow.</p>
         </motion.div>
 
-        <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-3 gap-8 max-w-6xl mx-auto">
           {benefits.map((b, i) => (
             <TiltCard key={b.label} benefit={b} index={i} />
           ))}

@@ -29,7 +29,6 @@ const LearningRoadmap = () => {
       <div className="absolute inset-0 roadmap-perspective-bg" />
       <div className="absolute inset-0 bg-grid opacity-30" />
 
-      {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {Array.from({ length: 15 }).map((_, i) => (
           <motion.div
@@ -52,12 +51,12 @@ const LearningRoadmap = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
-            <Rocket className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-base font-medium mb-5">
+            <Rocket className="h-5 w-5" />
             Interactive Roadmap
           </div>
-          <h2 className="font-display text-5xl lg:text-6xl font-bold mb-4">Your Path to Success</h2>
-          <p className="text-xl text-muted-foreground">Follow the journey thousands of students have taken.</p>
+          <h2 className="font-display text-6xl lg:text-7xl font-bold mb-6">Your Path to Success</h2>
+          <p className="text-2xl text-muted-foreground">Follow the journey thousands of students have taken.</p>
         </motion.div>
 
         <div className="relative max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
@@ -68,7 +67,6 @@ const LearningRoadmap = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            {/* Central animated line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 rounded-full overflow-hidden">
               <div className="w-full h-full bg-border/30" />
               <motion.div
@@ -77,7 +75,7 @@ const LearningRoadmap = () => {
               />
             </div>
 
-            <div className="space-y-10">
+            <div className="space-y-12">
               {roadmapSteps.map((step, i) => {
                 const Icon = iconMap[step.icon] || BookOpen;
                 const isRight = i % 2 === 1;
@@ -94,28 +92,27 @@ const LearningRoadmap = () => {
                     onMouseLeave={() => setHoveredStep(null)}
                     className={`relative flex items-start ${isRight ? "flex-row-reverse" : ""}`}
                   >
-                    {/* Content card */}
                     <div className={`flex-1 w-[calc(50%-3rem)] ${isRight ? "pl-10" : "pr-10"}`}>
                       <motion.div
                         animate={isHovered ? { scale: 1.04, y: -6 } : { scale: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className={`roadmap-card p-6 rounded-2xl border transition-all duration-300 ${
+                        className={`roadmap-card p-8 rounded-2xl border transition-all duration-300 ${
                           isHovered
                             ? "border-primary/40 shadow-lg shadow-primary/10 bg-card"
                             : "border-border/30 bg-card/70 backdrop-blur-sm"
                         }`}
                       >
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${stepColors[i]} flex items-center justify-center`}>
-                            <span className="text-white text-sm font-bold">{step.step}</span>
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${stepColors[i]} flex items-center justify-center`}>
+                            <span className="text-white text-base font-bold">{step.step}</span>
                           </div>
-                          <h3 className="font-display font-bold text-xl">{step.title}</h3>
+                          <h3 className="font-display font-bold text-2xl">{step.title}</h3>
                         </div>
-                        <p className="text-muted-foreground ml-13 text-base">{step.description}</p>
+                        <p className="text-muted-foreground ml-16 text-lg">{step.description}</p>
 
-                        <div className="flex items-center gap-2 mt-4 ml-13">
-                          <CheckCircle2 className="h-4 w-4 text-primary/50" />
-                          <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
+                        <div className="flex items-center gap-3 mt-5 ml-16">
+                          <CheckCircle2 className="h-5 w-5 text-primary/50" />
+                          <div className="flex-1 h-2.5 rounded-full bg-muted overflow-hidden">
                             <motion.div
                               className={`h-full rounded-full bg-gradient-to-r ${stepColors[i]}`}
                               initial={{ width: "0%" }}
@@ -128,7 +125,6 @@ const LearningRoadmap = () => {
                       </motion.div>
                     </div>
 
-                    {/* Center dot with 3D glow */}
                     <div className="relative z-10 flex-shrink-0 mt-3">
                       <motion.div
                         animate={isHovered ? { scale: 1.3 } : { scale: 1 }}
@@ -139,36 +135,34 @@ const LearningRoadmap = () => {
                           className={`absolute -inset-3 rounded-full bg-gradient-to-br ${stepColors[i]} opacity-20 blur-md`}
                           animate={isHovered ? { opacity: 0.5, scale: 1.6 } : { opacity: 0.2, scale: 1 }}
                         />
-                        <div className={`relative h-16 w-16 rounded-full bg-gradient-to-br ${stepColors[i]} flex items-center justify-center shadow-xl roadmap-dot-3d`}>
-                          <Icon className="h-7 w-7 text-white" />
+                        <div className={`relative h-18 w-18 rounded-full bg-gradient-to-br ${stepColors[i]} flex items-center justify-center shadow-xl roadmap-dot-3d`}>
+                          <Icon className="h-8 w-8 text-white" />
                         </div>
-                        <div className="absolute top-1.5 left-2.5 w-5 h-2.5 bg-white/30 rounded-full blur-sm" />
+                        <div className="absolute top-2 left-3 w-6 h-3 bg-white/30 rounded-full blur-sm" />
                       </motion.div>
                     </div>
 
-                    {/* Spacer */}
                     <div className="flex-1 w-[calc(50%-3rem)]" />
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Final achievement */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-              className="flex justify-center mt-14"
+              className="flex justify-center mt-16"
             >
               <div className="relative">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/20"
+                  className="absolute -inset-5 rounded-full border-2 border-dashed border-primary/20"
                 />
-                <div className="h-20 w-20 rounded-full gradient-bg flex items-center justify-center shadow-2xl timeline-dot-glow">
-                  <Rocket className="h-9 w-9 text-white" />
+                <div className="h-24 w-24 rounded-full gradient-bg flex items-center justify-center shadow-2xl timeline-dot-glow">
+                  <Rocket className="h-11 w-11 text-white" />
                 </div>
               </div>
             </motion.div>

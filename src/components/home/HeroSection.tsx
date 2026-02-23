@@ -15,7 +15,7 @@ const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: str
   }, [target, count]);
 
   return (
-    <span className="font-bold text-4xl text-foreground">
+    <span className="font-bold text-5xl text-foreground">
       <motion.span ref={ref}>{rounded}</motion.span>{suffix}
     </span>
   );
@@ -44,7 +44,6 @@ const HeroSection = () => {
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
       />
 
-      {/* Grid overlay */}
       <div className="absolute inset-0 bg-grid opacity-30" />
 
       <div className="container relative z-10" style={{ perspective: "1200px" }}>
@@ -52,10 +51,10 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 60, rotateX: 10 }}
           animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-5xl mx-auto text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
-          <h1 className="font-display text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.05]">
+          <h1 className="font-display text-8xl lg:text-9xl font-bold tracking-tight mb-10 leading-[1.02]">
             Learn. Compete.{" "}
             <span className="gradient-text">Get Hired.</span>
           </h1>
@@ -64,7 +63,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="text-xl text-muted-foreground mb-14 max-w-2xl mx-auto leading-relaxed"
+            className="text-2xl text-muted-foreground mb-16 max-w-3xl mx-auto leading-relaxed"
           >
             Live exams, instant results, ranking system, and digital badges — the platform built to make you job-ready.
           </motion.p>
@@ -73,12 +72,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex items-center justify-center gap-6 mb-20"
+            className="flex items-center justify-center gap-6 mb-24"
           >
-            <Button size="lg" className="gradient-bg text-white border-0 text-lg px-10 h-14 cta-confetti shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow" asChild>
-              <Link to="/courses">Start Free Today <ArrowRight className="ml-2 h-5 w-5" /></Link>
+            <Button size="lg" className="gradient-bg text-white border-0 text-xl px-12 h-16 cta-confetti shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow" asChild>
+              <Link to="/courses">Start Free Today <ArrowRight className="ml-2 h-6 w-6" /></Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-10 h-14 hover-glow" asChild>
+            <Button size="lg" variant="outline" className="text-xl px-12 h-16 hover-glow" asChild>
               <Link to="/courses">Explore Courses</Link>
             </Button>
           </motion.div>
@@ -88,17 +87,17 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="flex justify-center gap-16"
+            className="flex justify-center gap-20"
           >
             {[
               { icon: Users, target: 5000, suffix: "+", label: "Students" },
               { icon: BookOpen, target: 18, suffix: "", label: "Courses" },
               { icon: Trophy, target: 95, suffix: "%", label: "Pass Rate" },
             ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center gap-2">
-                <stat.icon className="h-5 w-5 text-primary mb-1" />
+              <div key={stat.label} className="flex flex-col items-center gap-3">
+                <stat.icon className="h-6 w-6 text-primary mb-1" />
                 <AnimatedCounter target={stat.target} suffix={stat.suffix} />
-                <span className="text-sm text-muted-foreground">{stat.label}</span>
+                <span className="text-base text-muted-foreground">{stat.label}</span>
               </div>
             ))}
           </motion.div>
