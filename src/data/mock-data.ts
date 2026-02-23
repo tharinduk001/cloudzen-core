@@ -226,6 +226,47 @@ export const universityModules: UniversityModule[] = [
   { id: "um6", semester: "Semester 3", title: "Cloud Infrastructure & Terraform", description: "Infrastructure as Code with Terraform and cloud architecture.", lessons: 10, duration: "5 weeks", outcomes: ["Write Terraform configurations", "Manage cloud resources", "Implement state management"] },
 ];
 
+// ==================== ROADMAP STEPS ====================
+export interface RoadmapStep {
+  step: number;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export const roadmapSteps: RoadmapStep[] = [
+  { step: 1, title: "Enroll", description: "Pick a free or premium course", icon: "BookOpen" },
+  { step: 2, title: "Learn", description: "Watch lessons & attend live sessions", icon: "Play" },
+  { step: 3, title: "Practice", description: "Build real projects & take exams", icon: "Code" },
+  { step: 4, title: "Get Certified", description: "Earn Open Badge 3.0 credentials", icon: "Award" },
+  { step: 5, title: "Get Hired", description: "Stand out with verified skills", icon: "Briefcase" },
+];
+
+// ==================== PRICING PLANS ====================
+export interface PricingPlan {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  highlighted?: boolean;
+}
+
+export const pricingPlans: PricingPlan[] = [
+  {
+    name: "Free",
+    price: "0",
+    description: "Get started with core content",
+    features: ["Access to free courses", "Community forum", "Basic projects", "Progress tracking"],
+  },
+  {
+    name: "Pro",
+    price: "19/mo",
+    description: "Unlock the full experience",
+    features: ["All courses (recorded + live)", "Live exams & ranking", "Digital badges (Open Badge 3.0)", "Hands-on projects", "Career roadmaps", "Priority support"],
+    highlighted: true,
+  },
+];
+
 // ==================== CATEGORIES ====================
 export const categories = [
   { name: "Cloud", icon: "Cloud", count: 12, color: "from-blue-500 to-blue-600" },
