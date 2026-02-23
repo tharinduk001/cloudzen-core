@@ -146,8 +146,8 @@ const Courses = () => {
           </div>
 
           <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="ml-auto shrink-0 bg-white/10 hover:bg-white/20 transition-all rounded-lg px-3.5 py-1.5 text-center border border-white/15 hover:border-white/25 hover:shadow-md hover:shadow-white/5">
-            <p className="text-[9px] text-white/50 leading-tight">Powered by</p>
-            <p className="font-display font-bold text-[11px] leading-tight">CertDirectory Credentials</p>
+            <p className="text-xs text-white/50 leading-tight">Powered by</p>
+            <p className="font-display font-bold text-sm leading-tight">CertDirectory Credentials</p>
           </a>
         </div>
       </motion.div>
