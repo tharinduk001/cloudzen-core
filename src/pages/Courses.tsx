@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpen, Clock, Star, Search, Filter } from "lucide-react";
+import { BookOpen, Clock, Star, Search, Filter, Award, ShieldCheck, Globe, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -102,44 +102,108 @@ const Courses = () => {
         <p className="text-muted-foreground">Explore our catalog of cloud, DevOps, and software engineering courses.</p>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-6">
-        <div className="relative flex-1 min-w-[200px] max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search courses..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
-        </div>
-        <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className="w-[160px]"><SelectValue placeholder="Category" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="Cloud">Cloud</SelectItem>
-            <SelectItem value="DevOps">DevOps</SelectItem>
-            <SelectItem value="Software Engineering">Software Engineering</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={level} onValueChange={setLevel}>
-          <SelectTrigger className="w-[160px]"><SelectValue placeholder="Level" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Levels</SelectItem>
-            <SelectItem value="Beginner">Beginner</SelectItem>
-            <SelectItem value="Intermediate">Intermediate</SelectItem>
-            <SelectItem value="Advanced">Advanced</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Main Content */}
+        <div className="flex-1 min-w-0">
+          {/* Filters */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            <div className="relative flex-1 min-w-[200px] max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Search courses..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+            </div>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger className="w-[160px]"><SelectValue placeholder="Category" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="Cloud">Cloud</SelectItem>
+                <SelectItem value="DevOps">DevOps</SelectItem>
+                <SelectItem value="Software Engineering">Software Engineering</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={level} onValueChange={setLevel}>
+              <SelectTrigger className="w-[160px]"><SelectValue placeholder="Level" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Levels</SelectItem>
+                <SelectItem value="Beginner">Beginner</SelectItem>
+                <SelectItem value="Intermediate">Intermediate</SelectItem>
+                <SelectItem value="Advanced">Advanced</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-      <Tabs defaultValue="all">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="Recorded Free">Free</TabsTrigger>
-          <TabsTrigger value="Recorded Premium">Premium</TabsTrigger>
-          <TabsTrigger value="Live">Live</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all"><GroupedView /></TabsContent>
-        <TabsContent value="Recorded Free"><CourseGrid type="Recorded Free" /></TabsContent>
-        <TabsContent value="Recorded Premium"><CourseGrid type="Recorded Premium" /></TabsContent>
-        <TabsContent value="Live"><CourseGrid type="Live" /></TabsContent>
-      </Tabs>
+          <Tabs defaultValue="all">
+            <TabsList>
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="Recorded Free">Free</TabsTrigger>
+              <TabsTrigger value="Recorded Premium">Premium</TabsTrigger>
+              <TabsTrigger value="Live">Live</TabsTrigger>
+            </TabsList>
+            <TabsContent value="all"><GroupedView /></TabsContent>
+            <TabsContent value="Recorded Free"><CourseGrid type="Recorded Free" /></TabsContent>
+            <TabsContent value="Recorded Premium"><CourseGrid type="Recorded Premium" /></TabsContent>
+            <TabsContent value="Live"><CourseGrid type="Live" /></TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Open Badge Sidebar */}
+        <aside className="lg:w-[300px] shrink-0">
+          <div className="lg:sticky lg:top-24 space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="rounded-xl gradient-bg p-6 text-white"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2.5 bg-white/20 rounded-lg">
+                  <Award className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-lg leading-tight">Open Badge 3.0</h3>
+                  <p className="text-white/70 text-xs">Globally Recognized Standard</p>
+                </div>
+              </div>
+
+              <p className="text-sm text-white/85 mb-4 leading-relaxed">
+                Every course completion earns you a <strong>verified digital credential</strong> compliant with the Open Badge 3.0 standard — recognized by employers and institutions worldwide.
+              </p>
+
+              <div className="space-y-3 mb-5">
+                {[
+                  { icon: ShieldCheck, text: "Verifiable & tamper-proof credentials" },
+                  { icon: Globe, text: "Accepted globally by employers" },
+                  { icon: CheckCircle, text: "Shareable on LinkedIn & portfolios" },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-start gap-2.5">
+                    <Icon className="h-4 w-4 mt-0.5 text-white/90 shrink-0" />
+                    <span className="text-sm text-white/85">{text}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-white/10 rounded-lg p-3 text-center">
+                <p className="text-xs text-white/60 mb-1">Powered by</p>
+                <p className="font-display font-bold text-sm">Open Badges 3.0</p>
+                <p className="text-xs text-white/60">IMS Global Standard</p>
+              </div>
+            </motion.div>
+
+            <Card className="border-primary/20">
+              <CardContent className="p-4">
+                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                  <Award className="h-4 w-4 text-primary" />
+                  How It Works
+                </h4>
+                <ol className="text-xs text-muted-foreground space-y-2">
+                  <li className="flex gap-2"><span className="font-bold text-primary">1.</span> Enroll & complete a course</li>
+                  <li className="flex gap-2"><span className="font-bold text-primary">2.</span> Receive your digital badge</li>
+                  <li className="flex gap-2"><span className="font-bold text-primary">3.</span> Share anywhere instantly</li>
+                </ol>
+              </CardContent>
+            </Card>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 };
