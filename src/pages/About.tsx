@@ -16,6 +16,24 @@ const About = () => (
       <h1 className="font-display text-3xl md:text-4xl font-bold">About CloudZen</h1>
     </div>
 
+    {/* Mission & Vision */}
+    <div className="grid md:grid-cols-2 gap-6 mb-16">
+      <Card>
+        <CardContent className="p-6">
+          <Target className="h-8 w-8 text-primary mb-3" />
+          <h2 className="font-display text-xl font-bold mb-2">Our Mission</h2>
+          <p className="text-muted-foreground">To bridge the gap between academic learning and industry readiness by providing hands-on, project-based education in Cloud, DevOps, and Software Engineering.</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="p-6">
+          <Eye className="h-8 w-8 text-primary mb-3" />
+          <h2 className="font-display text-xl font-bold mb-2">Our Vision</h2>
+          <p className="text-muted-foreground">To become the leading platform for practical tech education in South Asia and beyond, empowering the next generation of cloud-native engineers.</p>
+        </CardContent>
+      </Card>
+    </div>
+
     {/* Founder's Message */}
     <div className="mb-16">
       <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Our Founder</h2>
@@ -38,24 +56,6 @@ const About = () => (
           </div>
         </div>
       </div>
-    </div>
-
-    {/* Mission & Vision */}
-    <div className="grid md:grid-cols-2 gap-6 mb-16">
-      <Card>
-        <CardContent className="p-6">
-          <Target className="h-8 w-8 text-primary mb-3" />
-          <h2 className="font-display text-xl font-bold mb-2">Our Mission</h2>
-          <p className="text-muted-foreground">To bridge the gap between academic learning and industry readiness by providing hands-on, project-based education in Cloud, DevOps, and Software Engineering.</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="p-6">
-          <Eye className="h-8 w-8 text-primary mb-3" />
-          <h2 className="font-display text-xl font-bold mb-2">Our Vision</h2>
-          <p className="text-muted-foreground">To become the leading platform for practical tech education in South Asia and beyond, empowering the next generation of cloud-native engineers.</p>
-        </CardContent>
-      </Card>
     </div>
 
     {/* Team Members */}
