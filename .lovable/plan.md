@@ -1,112 +1,106 @@
 
-
-# Homepage Redesign: Student-Focused, Motivational UI
+# Homepage Simplification + 3D Immersive Experience (Desktop-Only Focus)
 
 ## Overview
-Redesign the homepage (`src/pages/Index.tsx`) to create a modern, minimal, student-appealing experience with an animated learning roadmap, stronger CTAs, key benefit highlights, and trust-building elements. All changes stay within the existing tech stack (React, Framer Motion, Tailwind, shadcn/ui).
+Strip the homepage down to a clean, simple, full-screen 3D immersive website experience optimized for desktop users. Each section fills the entire viewport with smooth scroll-snap transitions, large typography, and spacious layouts. Remove mobile-responsive clutter and design purely for 1024px+ screens.
 
----
+## Design Philosophy
+- Full-viewport sections with scroll-snap
+- Large, bold typography with generous whitespace
+- Fewer elements per screen = lower cognitive load
+- 3D perspective transforms and parallax depth on every section
+- Smooth Framer Motion page transitions
+- Desktop-only: no hamburger menus, no stacked mobile layouts
 
 ## What Changes
 
-### 1. Revamped Hero Section
-- Shorter, punchier headline aimed at students (e.g., "Master Cloud Skills. Land Your Dream Job.")
-- Animated counter stats inline (students, courses, pass rate)
-- Two clear CTAs: "Start Free" (primary gradient) and "Explore Courses" (outline)
-- Floating animated badge elements (e.g., "Live Exams", "Instant Results") orbiting subtly
+### 1. Index Page - Full-Screen Scroll-Snap Container
+- Wrap all sections in a scroll-snap container (`snap-y snap-mandatory`)
+- Each section becomes `min-h-screen snap-start` with centered content
+- Smooth scroll behavior between sections
 
-### 2. Key Benefits Strip
-- Horizontal scrolling row of benefit cards with icons and short labels
-- Benefits: Live Exams, Instant Marking, Ranking System, Digital Badges, Hands-on Projects, Career Roadmaps
-- Each card has a subtle hover scale animation
-- Uses `CheckCircle2` or custom icons from Lucide
+### 2. Hero Section - Immersive 3D Landing
+- Full viewport hero with large centered text (7xl+)
+- 3D floating elements using perspective transforms and Framer Motion
+- Animated gradient orbs in background with parallax movement
+- Two large CTA buttons with hover glow effects
+- Animated student counter with large numbers
+- Remove social proof avatars (simplify)
 
-### 3. Animated Learning Roadmap Section (New - Star Feature)
-- Vertical timeline with 5 steps: Enroll -> Learn -> Practice -> Get Certified -> Get Hired
-- Each step animates in on scroll using Framer Motion `whileInView`
-- Active/completed steps show a glowing gradient dot; upcoming steps are muted
-- Connecting line animates progressively (using a gradient stroke that fills on scroll)
-- Each step has a short description and an icon
-- Mobile: single-column vertical timeline; Desktop: alternating left/right layout
+### 3. Benefits Strip - 3D Card Grid
+- Full-screen section with 6 benefit cards in a 3x2 grid
+- Each card has a 3D tilt effect on hover (rotateX/Y based on mouse position)
+- Cards float with subtle depth using `translateZ` and perspective
+- Clean icons, bold labels, minimal text
 
-### 4. "Why Students Love Us" Section (replaces plain testimonials)
-- Testimonial cards with star ratings, student photo placeholder, and university name
-- Add a large animated counter banner above: "5,000+ students | 18 courses | 4.8 avg rating"
-- Cards use staggered fade-up animation
+### 4. Learning Roadmap - Enhanced 3D Timeline (Already exists, refine)
+- Keep the existing 3D roadmap but make it full-viewport
+- Increase node sizes and spacing for desktop
+- Add connecting particle effects between nodes
+- Make the scroll-driven animation smoother with larger viewport offset
 
-### 5. Course Spotlight (Simplified)
-- Show top 3 courses in larger cards with clear pricing badges
-- "Free" courses highlighted with a green accent badge
-- "Start Now" CTA button on each card instead of just linking
+### 5. Course Spotlight - 3D Carousel/Grid
+- Full-screen section with 3 large course cards
+- Cards have depth/shadow layers creating a "floating" 3D effect
+- Hover reveals card details with smooth scale animation
+- Large "Start Now" buttons
 
-### 6. Pricing/Subscription Teaser (New Section)
-- Simple 2-column layout: "Free Plan" vs "Pro Plan"
-- Free: access to free courses, community
-- Pro: all courses, live exams, ranking, badges, projects
-- Prominent "Unlock Full Access" CTA button with glow effect
-- Trust badge: "Cancel anytime" / "7-day money back"
+### 6. Testimonials - Cinematic Layout
+- Full-screen with a large featured quote in the center
+- 3D perspective text with depth
+- Rotating through testimonials with crossfade animation
+- Large stat counters floating around
 
-### 7. Final CTA Banner (Enhanced)
-- Motivational text: "Your future starts today"
-- Single large "Join Now - It's Free" button
-- Subtle particle/confetti animation on hover (lightweight CSS-only)
+### 7. Pricing - Side-by-Side 3D Cards
+- Full viewport with two large pricing cards
+- Pro card elevated with stronger 3D shadow and glow
+- Hover lifts cards with spring animation
+- Clean comparison layout
+
+### 8. Final CTA - Dramatic Full-Screen
+- Full gradient background covering entire viewport
+- Very large text (6xl-7xl)
+- Single prominent CTA button with pulse glow
+- Floating particles/orbs in background
 
 ---
 
 ## Technical Details
 
 ### Files Modified
-1. **`src/pages/Index.tsx`** - Complete redesign of all homepage sections
-2. **`src/data/mock-data.ts`** - Add roadmap steps data and pricing plan data
-3. **`src/index.css`** - Add timeline connector animation styles and glow keyframes
 
-### Animation Approach
-- All scroll animations use Framer Motion `whileInView` with `viewport={{ once: true }}`
-- Staggered children use `custom={i}` delay pattern (already established in codebase)
-- Roadmap timeline uses a CSS gradient line with Framer Motion `scaleY` animation
-- Counter animations use Framer Motion `useMotionValue` + `useTransform` for number counting
-- All animations are lightweight -- no heavy libraries added
+1. **`src/pages/Index.tsx`** - Add scroll-snap container wrapper, pass full-screen props
+2. **`src/components/home/HeroSection.tsx`** - Full viewport, larger text, 3D floating elements
+3. **`src/components/home/BenefitsStrip.tsx`** - Full viewport, 3x2 grid, 3D tilt hover effect
+4. **`src/components/home/LearningRoadmap.tsx`** - Full viewport sizing, larger nodes
+5. **`src/components/home/CourseSpotlight.tsx`** - Full viewport, floating 3D cards
+6. **`src/components/home/TestimonialsSection.tsx`** - Cinematic single-quote layout
+7. **`src/components/home/PricingTeaser.tsx`** - Full viewport, elevated 3D cards
+8. **`src/components/home/FinalCTA.tsx`** - Full viewport dramatic CTA
+9. **`src/index.css`** - Add scroll-snap utilities, 3D tilt classes, new glow effects
 
-### New Data Structures (in mock-data.ts)
+### Key Technical Approach
 
-```typescript
-// Roadmap steps for homepage
-export const roadmapSteps = [
-  { step: 1, title: "Enroll", description: "Pick a free or premium course", icon: "BookOpen" },
-  { step: 2, title: "Learn", description: "Watch lessons & attend live sessions", icon: "Play" },
-  { step: 3, title: "Practice", description: "Build real projects & take exams", icon: "Code" },
-  { step: 4, title: "Get Certified", description: "Earn Open Badge 3.0 credentials", icon: "Award" },
-  { step: 5, title: "Get Hired", description: "Stand out with verified skills", icon: "Briefcase" },
-];
-
-// Pricing plans
-export const pricingPlans = [
-  { name: "Free", price: "0", features: [...] },
-  { name: "Pro", price: "19/mo", features: [...], highlighted: true },
-];
+**Scroll Snap Container (Index.tsx):**
+```text
+div.h-screen.overflow-y-auto.snap-y.snap-mandatory
+  section.min-h-screen.snap-start  (Hero)
+  section.min-h-screen.snap-start  (Benefits)
+  section.min-h-screen.snap-start  (Roadmap)
+  ...
 ```
 
-### Key Benefits Data (inline in Index.tsx)
-```typescript
-const benefits = [
-  { icon: Radio, label: "Live Exams", desc: "Real-time competitive exams" },
-  { icon: BarChart3, label: "Ranking System", desc: "See where you stand" },
-  { icon: Zap, label: "Instant Marking", desc: "Get results immediately" },
-  { icon: Award, label: "Digital Badges", desc: "Open Badge 3.0 certified" },
-  { icon: Code, label: "Hands-on Projects", desc: "Build real things" },
-  { icon: TrendingUp, label: "Career Roadmaps", desc: "Clear path forward" },
-];
-```
+**3D Tilt Effect (Benefits cards):**
+- Track mouse position relative to card center
+- Apply `rotateX` and `rotateY` transforms via Framer Motion
+- Add `translateZ(20px)` for depth on hover
+- Container uses `perspective: 1000px`
 
-### Responsive Design
-- Mobile-first grid layouts: 1 column on mobile, expanding to 2-3 on tablet/desktop
-- Roadmap: vertical single-column on all sizes, alternating card alignment on desktop
-- Pricing: stacked on mobile, side-by-side on desktop
-- All touch-friendly tap targets (min 44px)
+**All animations:**
+- Framer Motion only (no new dependencies)
+- `whileInView` with `viewport={{ once: true }}`
+- Spring physics for hover interactions
+- CSS transforms for GPU acceleration
 
-### Performance
-- No new dependencies required
-- All animations use CSS transforms (GPU-accelerated)
-- `viewport={{ once: true }}` prevents re-triggering animations
-- Images remain lazy-loaded placeholders
-
+### No New Dependencies
+Everything uses existing Framer Motion + Tailwind. No React Three Fiber needed -- CSS 3D transforms with Framer Motion create a convincing 3D feel that's much lighter weight.
