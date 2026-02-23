@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, Users, BookOpen, Linkedin, Github, Twitter } from "lucide-react";
+import { Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,17 +14,15 @@ const Instructors = () => (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
       {instructors.map((inst, i) => (
         <motion.div key={inst.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-          <Link to={`/instructors/${inst.id}`}>
-            <Card className="hover-glow hover:border-primary/30 transition-all group h-full text-center">
-              <CardContent className="p-5">
-                <div className="h-20 w-20 rounded-full bg-muted mx-auto mb-3 flex items-center justify-center">
-                  <Users className="h-8 w-8 text-muted-foreground/40" />
-                </div>
-                <h3 className="font-display font-semibold group-hover:text-primary transition-colors">{inst.name}</h3>
-                <p className="text-xs text-muted-foreground mb-2">{inst.title}</p>
-              </CardContent>
-            </Card>
-          </Link>
+          <Card className="hover-glow hover:border-primary/30 transition-all h-full text-center">
+            <CardContent className="p-5">
+              <div className="h-20 w-20 rounded-full bg-muted mx-auto mb-3 flex items-center justify-center">
+                <Users className="h-8 w-8 text-muted-foreground/40" />
+              </div>
+              <h3 className="font-display font-semibold">{inst.name}</h3>
+              <p className="text-xs text-muted-foreground mb-2">{inst.title}</p>
+            </CardContent>
+          </Card>
         </motion.div>
       ))}
     </div>
