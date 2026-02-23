@@ -107,23 +107,30 @@ const Courses = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="rounded-xl gradient-bg px-4 py-3 text-white mb-8 overflow-hidden"
+        className="relative rounded-xl gradient-bg px-5 py-3.5 text-white mb-8 overflow-hidden border border-white/10 shadow-lg shadow-primary/10"
       >
-        <div className="flex items-center gap-4 flex-nowrap overflow-x-auto scrollbar-none">
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="p-2 bg-white/20 rounded-lg">
-              <Award className="h-5 w-5" />
+        {/* Decorative glow elements */}
+        <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+
+        <div className="relative flex items-center gap-4 flex-nowrap overflow-x-auto scrollbar-none">
+          <div className="flex items-center gap-2.5 shrink-0">
+            <div className="p-2 bg-white/15 rounded-lg border border-white/20 shadow-inner shadow-white/5">
+              <Award className="h-5 w-5 drop-shadow-sm" />
             </div>
-            <span className="font-display font-bold text-sm whitespace-nowrap">Open Badge 3.0</span>
+            <div className="shrink-0">
+              <span className="font-display font-bold text-sm whitespace-nowrap block leading-tight">Open Badge 3.0</span>
+              <span className="text-[10px] text-white/50 leading-tight">Digital Credentials</span>
+            </div>
           </div>
 
-          <span className="hidden sm:inline text-white/40">|</span>
+          <div className="hidden sm:block w-px h-6 bg-white/20 shrink-0" />
 
-          <p className="text-xs text-white/80 shrink-0 whitespace-nowrap hidden sm:block">
-            Earn <strong>verified digital credentials</strong> with every course
+          <p className="text-xs text-white/85 shrink-0 whitespace-nowrap hidden sm:block">
+            Earn <span className="font-semibold text-white">verified credentials</span> with every course
           </p>
 
-          <span className="hidden md:inline text-white/40">|</span>
+          <div className="hidden md:block w-px h-6 bg-white/20 shrink-0" />
 
           <div className="hidden md:flex items-center gap-3 shrink-0">
             {[
@@ -131,14 +138,14 @@ const Courses = () => {
               { icon: Globe, text: "Global" },
               { icon: CheckCircle, text: "Shareable" },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-1">
-                <Icon className="h-3.5 w-3.5 text-white/90" />
-                <span className="text-xs text-white/80">{text}</span>
+              <div key={text} className="flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 border border-white/10">
+                <Icon className="h-3 w-3 text-white/90" />
+                <span className="text-[11px] text-white/85 font-medium">{text}</span>
               </div>
             ))}
           </div>
 
-          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="ml-auto shrink-0 bg-white/10 hover:bg-white/15 transition-colors rounded-md px-3 py-1.5 text-center">
+          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="ml-auto shrink-0 bg-white/10 hover:bg-white/20 transition-all rounded-lg px-3.5 py-1.5 text-center border border-white/15 hover:border-white/25 hover:shadow-md hover:shadow-white/5">
             <p className="text-[9px] text-white/50 leading-tight">Powered by</p>
             <p className="font-display font-bold text-[11px] leading-tight">CertDirectory Credentials</p>
           </a>
