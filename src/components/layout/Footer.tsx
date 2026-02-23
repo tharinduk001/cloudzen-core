@@ -33,25 +33,25 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="border-t border-white/10 gradient-bg text-white">
       <div className="container py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand + Newsletter */}
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-bg">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
                 <span className="text-sm font-bold text-white">CZ</span>
               </div>
-              <span>Cloud<span className="gradient-text">Zen</span></span>
+              <span className="text-white">Cloud<span className="text-white/80">Zen</span></span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-6 max-w-xs">
+            <p className="text-sm text-white/70 mb-6 max-w-xs">
               Master Cloud & DevOps with hands-on projects, expert-led courses, and Open Badge 3.0 credentials.
             </p>
             <div className="space-y-2">
               <p className="text-sm font-medium">Subscribe to our newsletter</p>
               <div className="flex gap-2">
                 <Input placeholder="Enter your email" className="max-w-[220px]" />
-                <Button size="sm" className="gradient-bg text-white border-0">
+                <Button size="sm" className="bg-white/20 hover:bg-white/30 text-white border-0">
                   <Mail className="h-4 w-4" />
                 </Button>
               </div>
@@ -65,7 +65,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.path}>
-                    <Link to={link.path} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <Link to={link.path} className="text-sm text-white/70 hover:text-white transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -76,8 +76,8 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-12 pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-white/60">
             © 2026 CloudZen. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
@@ -85,7 +85,7 @@ export function Footer() {
               <a
                 key={social.label}
                 href={social.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-white/60 hover:text-white transition-colors"
                 aria-label={social.label}
               >
                 <social.icon className="h-5 w-5" />
