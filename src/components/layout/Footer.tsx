@@ -50,7 +50,7 @@ export function Footer() {
             <div className="space-y-2">
               <p className="text-sm font-medium">Subscribe to our newsletter</p>
               <div className="flex gap-2">
-                <Input placeholder="Enter your email" className="max-w-[220px]" />
+                <Input placeholder="Enter your email" className="max-w-[220px] text-white bg-white/10 border-white/20 placeholder:text-white/50" />
                 <Button size="sm" className="bg-white/20 hover:bg-white/30 text-white border-0">
                   <Mail className="h-4 w-4" />
                 </Button>
