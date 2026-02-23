@@ -23,9 +23,6 @@ const Instructors = () => (
                 </div>
                 <h3 className="font-display font-semibold group-hover:text-primary transition-colors">{inst.name}</h3>
                 <p className="text-xs text-muted-foreground mb-2">{inst.title}</p>
-                <div className="flex flex-wrap justify-center gap-1">
-                  {inst.expertise.map((e) => <Badge key={e} variant="secondary" className="text-xs">{e}</Badge>)}
-                </div>
               </CardContent>
             </Card>
           </Link>
