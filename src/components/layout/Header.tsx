@@ -115,9 +115,6 @@ export function Header() {
         {/* Right Actions */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="ghost" size="sm" className="hidden sm:flex" asChild>
-            <Link to="/sign-in">Sign In</Link>
-          </Button>
           <Button size="sm" className="hidden sm:flex gradient-bg text-white border-0" asChild>
             <Link to="/courses">Get Started</Link>
           </Button>
@@ -157,9 +154,6 @@ export function Header() {
                   )
                 )}
                 <div className="border-t border-border mt-4 pt-4 flex flex-col gap-2">
-                  <Button variant="outline" asChild>
-                    <Link to="/sign-in" onClick={() => setMobileOpen(false)}>Sign In</Link>
-                  </Button>
                   <Button className="gradient-bg text-white border-0" asChild>
                     <Link to="/courses" onClick={() => setMobileOpen(false)}>Get Started</Link>
                   </Button>
