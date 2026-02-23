@@ -181,11 +181,11 @@ const Courses = () => {
                 ))}
               </div>
 
-              <div className="bg-white/10 rounded-lg p-3 text-center">
+              <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 rounded-lg p-3 text-center hover:bg-white/15 transition-colors">
                 <p className="text-xs text-white/60 mb-1">Powered by</p>
-                <p className="font-display font-bold text-sm">Open Badges 3.0</p>
-                <p className="text-xs text-white/60">IMS Global Standard</p>
-              </div>
+                <p className="font-display font-bold text-sm">CertDirectory Credentials</p>
+                <p className="text-xs text-white/60">credentials.certdirectory.io</p>
+              </a>
             </motion.div>
 
             <Card className="border-primary/20">
