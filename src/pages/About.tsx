@@ -1,32 +1,12 @@
-import { Award, Target, Eye, Users, Zap, CheckCircle2, Linkedin, Twitter, Github } from "lucide-react";
+import { Award, Target, Eye, Linkedin, Twitter, Github } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const teamMembers = [
-  {
-    name: "Aisha Rahman",
-    role: "Lead Instructor – Cloud Architecture",
-    image: "",
-    initials: "AR",
-  },
-  {
-    name: "Vikram Patel",
-    role: "DevOps Curriculum Lead",
-    image: "",
-    initials: "VP",
-  },
-  {
-    name: "Fatima Noor",
-    role: "Community & Student Success Manager",
-    image: "",
-    initials: "FN",
-  },
-  {
-    name: "Raj Menon",
-    role: "Platform Engineer",
-    image: "",
-    initials: "RM",
-  },
+  { name: "Aisha Rahman", role: "Lead Instructor – Cloud Architecture", image: "", initials: "AR" },
+  { name: "Vikram Patel", role: "DevOps Curriculum Lead", image: "", initials: "VP" },
+  { name: "Fatima Noor", role: "Community & Student Success Manager", image: "", initials: "FN" },
+  { name: "Raj Menon", role: "Platform Engineer", image: "", initials: "RM" },
 ];
 
 const About = () => (
@@ -37,6 +17,30 @@ const About = () => (
       <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
         We're on a mission to make Cloud and DevOps education accessible, practical, and career-focused for students and freshers everywhere.
       </p>
+    </div>
+
+    {/* Founder's Message */}
+    <div className="mb-16">
+      <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Our Founder</h2>
+      <div className="grid md:grid-cols-5 gap-8 items-center">
+        <div className="md:col-span-2 flex justify-center">
+          <div className="relative w-64 h-72 rounded-2xl overflow-hidden bg-muted border">
+            <img src="/placeholder.svg" alt="Founder portrait" className="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div className="md:col-span-3">
+          <h3 className="font-display text-xl font-bold mb-1">Mohammed Hasan</h3>
+          <p className="text-sm text-primary font-medium mb-4">Founder & CEO, CloudZen</p>
+          <blockquote className="border-l-4 border-primary pl-4 text-muted-foreground italic leading-relaxed space-y-3">
+            <p>"I started CloudZen because I saw too many talented students struggling to break into the tech industry — not because they lacked potential, but because they lacked access to practical, industry-aligned education."</p>
+            <p>"Our goal is simple: give every learner the hands-on experience and credentials they need to land their first cloud or DevOps role with confidence. We believe education should be a launchpad, not a barrier."</p>
+          </blockquote>
+          <div className="flex gap-3 mt-4">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="h-5 w-5" /></a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-5 w-5" /></a>
+          </div>
+        </div>
+      </div>
     </div>
 
     {/* Mission & Vision */}
@@ -56,58 +60,6 @@ const About = () => (
         </CardContent>
       </Card>
     </div>
-
-    {/* Founder's Message */}
-    <div className="mb-16">
-      <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Our Founder</h2>
-      <div className="grid md:grid-cols-5 gap-8 items-center">
-        <div className="md:col-span-2 flex justify-center">
-          <div className="relative w-64 h-72 rounded-2xl overflow-hidden bg-muted border">
-            <img
-              src="/placeholder.svg"
-              alt="Founder portrait"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="md:col-span-3">
-          <h3 className="font-display text-xl font-bold mb-1">Mohammed Hasan</h3>
-          <p className="text-sm text-primary font-medium mb-4">Founder & CEO, CloudZen</p>
-          <blockquote className="border-l-4 border-primary pl-4 text-muted-foreground italic leading-relaxed space-y-3">
-            <p>
-              "I started CloudZen because I saw too many talented students struggling to break into the tech industry — not because they lacked potential, but because they lacked access to practical, industry-aligned education."
-            </p>
-            <p>
-              "Our goal is simple: give every learner the hands-on experience and credentials they need to land their first cloud or DevOps role with confidence. We believe education should be a launchpad, not a barrier."
-            </p>
-          </blockquote>
-          <div className="flex gap-3 mt-4">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="h-5 w-5" /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-5 w-5" /></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Why CloudZen */}
-    <Card className="mb-16">
-      <CardContent className="p-6">
-        <h2 className="font-display text-xl font-bold mb-4">Why CloudZen?</h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {[
-            { icon: Zap, text: "Hands-on projects that simulate real-world scenarios" },
-            { icon: Award, text: "Open Badge 3.0 compliant digital credentials" },
-            { icon: Users, text: "Expert instructors with industry experience" },
-            { icon: CheckCircle2, text: "Structured learning paths from beginner to job-ready" },
-          ].map((item) => (
-            <div key={item.text} className="flex items-start gap-3">
-              <item.icon className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-              <p className="text-sm">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
 
     {/* Team Members */}
     <div className="mb-16">
