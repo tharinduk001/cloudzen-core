@@ -1,78 +1,100 @@
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { Star, Quote, Users, BookOpen, TrendingUp } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote, Users, BookOpen, TrendingUp } from "lucide-react";
 import { testimonials } from "@/data/mock-data";
-import { useEffect } from "react";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
-};
-
-const StatCounter = ({ target, suffix, label, icon: Icon }: { target: number; suffix: string; label: string; icon: React.ElementType }) => {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => {
-    if (target >= 1000) return Math.round(v).toLocaleString();
-    return v.toFixed(1);
-  });
-
-  useEffect(() => {
-    const controls = animate(count, target, { duration: 2, ease: "easeOut" });
-    return controls.stop;
-  }, [target, count]);
-
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <Icon className="h-5 w-5 text-primary mb-1" />
-      <span className="font-bold text-2xl md:text-3xl text-foreground">
-        <motion.span>{rounded}</motion.span>{suffix}
-      </span>
-      <span className="text-sm text-muted-foreground">{label}</span>
-    </div>
-  );
-};
+import { useState, useEffect } from "react";
 
 const TestimonialsSection = () => {
-  return (
-    <section className="py-20 gradient-bg-subtle bg-grid">
-      <div className="container">
-        <div className="text-center mb-10">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">Why Students Love Us</h2>
-          <p className="text-muted-foreground">Hear from our growing community.</p>
-        </div>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        {/* Stats banner */}
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const active = testimonials[activeIndex];
+
+  return (
+    <section className="min-h-screen snap-start relative flex items-center overflow-hidden">
+      <div className="absolute inset-0 gradient-bg-subtle" />
+      <div className="absolute inset-0 bg-grid opacity-20" />
+
+      {/* Floating stat orbs */}
+      <motion.div
+        className="absolute top-[15%] left-[10%] flex flex-col items-center gap-1 px-6 py-4 rounded-2xl bg-card/60 backdrop-blur-md border border-border/30"
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Users className="h-5 w-5 text-primary mb-1" />
+        <span className="font-bold text-3xl text-foreground">5,000+</span>
+        <span className="text-sm text-muted-foreground">Students</span>
+      </motion.div>
+
+      <motion.div
+        className="absolute top-[20%] right-[10%] flex flex-col items-center gap-1 px-6 py-4 rounded-2xl bg-card/60 backdrop-blur-md border border-border/30"
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <BookOpen className="h-5 w-5 text-primary mb-1" />
+        <span className="font-bold text-3xl text-foreground">18</span>
+        <span className="text-sm text-muted-foreground">Courses</span>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-[20%] right-[15%] flex flex-col items-center gap-1 px-6 py-4 rounded-2xl bg-card/60 backdrop-blur-md border border-border/30"
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      >
+        <TrendingUp className="h-5 w-5 text-primary mb-1" />
+        <span className="font-bold text-3xl text-foreground">4.8</span>
+        <span className="text-sm text-muted-foreground">Avg Rating</span>
+      </motion.div>
+
+      <div className="container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-10 md:gap-16 mb-14 py-6 px-4 rounded-2xl bg-card/50 border border-border/40 backdrop-blur-sm"
+          className="text-center mb-16"
         >
-          <StatCounter target={5000} suffix="+" label="Students" icon={Users} />
-          <StatCounter target={18} suffix="" label="Courses" icon={BookOpen} />
-          <StatCounter target={4.8} suffix="" label="Avg Rating" icon={TrendingUp} />
+          <h2 className="font-display text-5xl lg:text-6xl font-bold mb-4">Why Students Love Us</h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((t, i) => (
-            <motion.div key={t.name} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
-              <Card className="h-full flex flex-col hover-glow transition-shadow">
-                <CardContent className="p-5 flex-1 flex flex-col">
-                  <div className="flex items-center gap-1 mb-3">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className={`h-4 w-4 ${j < t.rating ? "text-yellow-500 fill-yellow-500" : "text-muted"}`} />
-                    ))}
-                  </div>
-                  <Quote className="h-4 w-4 text-primary/30 mb-2" />
-                  <p className="text-sm text-muted-foreground mb-4 flex-1">{t.quote}</p>
-                  <div className="mt-auto">
-                    <p className="text-base font-semibold">{t.name}</p>
-                    <p className="text-sm text-muted-foreground">{t.university}</p>
-                  </div>
-                </CardContent>
-              </Card>
+        {/* Cinematic featured quote */}
+        <div className="max-w-3xl mx-auto text-center" style={{ perspective: "800px" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 30, rotateX: 5 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, y: -30, rotateX: -5 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
+            >
+              <Quote className="h-12 w-12 text-primary/20 mx-auto" />
+              <p className="text-2xl lg:text-3xl text-foreground leading-relaxed font-display font-medium">
+                "{active.quote}"
+              </p>
+              <div>
+                <p className="text-xl font-bold">{active.name}</p>
+                <p className="text-muted-foreground">{active.university}</p>
+              </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-3 mt-12">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex ? "w-10 bg-primary" : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
