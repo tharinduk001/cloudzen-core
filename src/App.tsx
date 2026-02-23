@@ -17,7 +17,7 @@ import EventDetail from "./pages/EventDetail";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Instructors from "./pages/Instructors";
-import InstructorDetail from "./pages/InstructorDetail";
+
 import Consultations from "./pages/Consultations";
 import Challenges from "./pages/Challenges";
 import About from "./pages/About";
@@ -50,7 +50,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/instructors" element={<Instructors />} />
-              <Route path="/instructors/:id" element={<InstructorDetail />} />
+              
               <Route path="/consultations" element={<Consultations />} />
               <Route path="/challenges" element={<Challenges />} />
               <Route path="/about" element={<About />} />
