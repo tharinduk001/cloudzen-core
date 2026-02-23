@@ -23,15 +23,8 @@ const Instructors = () => (
                 </div>
                 <h3 className="font-display font-semibold group-hover:text-primary transition-colors">{inst.name}</h3>
                 <p className="text-xs text-muted-foreground mb-2">{inst.title}</p>
-                <div className="flex items-center justify-center gap-1 mb-2">
-                  <Star className="h-3.5 w-3.5 text-yellow-500 fill-yellow-500" />
-                  <span className="text-sm font-medium">{inst.rating}</span>
-                </div>
                 <div className="flex flex-wrap justify-center gap-1">
                   {inst.expertise.map((e) => <Badge key={e} variant="secondary" className="text-xs">{e}</Badge>)}
-                </div>
-                <div className="mt-3 text-xs text-muted-foreground">
-                  {inst.courses} courses · {inst.students} students
                 </div>
               </CardContent>
             </Card>
