@@ -12,11 +12,8 @@ const teamMembers = [
 const About = () => (
   <div className="container py-8">
     {/* Header */}
-    <div className="text-center mb-12">
-      <h1 className="font-display text-3xl md:text-4xl font-bold mb-4">About CloudZen</h1>
-      <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-        We're on a mission to make Cloud and DevOps education accessible, practical, and career-focused for students and freshers everywhere.
-      </p>
+    <div className="mb-12">
+      <h1 className="font-display text-3xl md:text-4xl font-bold">About CloudZen</h1>
     </div>
 
     {/* Founder's Message */}
