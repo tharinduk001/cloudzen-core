@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, Search, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -24,7 +24,7 @@ const moreNav = [
 
 const allNavItems = [...primaryNav, ...moreNav];
 
-export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
+export function Header() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -114,9 +114,6 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
 
         {/* Right Actions */}
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={onSearchOpen} className="hidden sm:flex">
-            <Search className="h-5 w-5" />
-          </Button>
           <ThemeToggle />
           <Button variant="ghost" size="sm" className="hidden sm:flex" asChild>
             <Link to="/sign-in">Sign In</Link>
@@ -134,10 +131,6 @@ export function Header({ onSearchOpen }: { onSearchOpen: () => void }) {
             </SheetTrigger>
             <SheetContent side="right" className="w-80 overflow-y-auto">
               <div className="flex flex-col gap-2 pt-8">
-                <Button variant="ghost" size="icon" onClick={onSearchOpen} className="self-start mb-2">
-                  <Search className="h-5 w-5" />
-                  <span className="ml-2">Search</span>
-                </Button>
                 {allNavItems.map((item) =>
                   item.comingSoon ? (
                     <span
