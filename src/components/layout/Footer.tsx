@@ -7,14 +7,11 @@ const footerLinks = {
   Platform: [
     { label: "Courses", path: "/courses" },
     { label: "Projects", path: "/projects" },
-    { label: "Challenges", path: "/challenges" },
   ],
   Resources: [
     { label: "Blog", path: "/blog" },
-    { label: "Interview Prep", path: "/interview-prep" },
-    
     { label: "Events", path: "/events" },
-    { label: "Consultations", path: "/consultations" },
+    { label: "Contact Us", path: "/consultations" },
   ],
   Company: [
     { label: "About", path: "/about" },
