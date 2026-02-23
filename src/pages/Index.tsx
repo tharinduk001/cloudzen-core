@@ -87,36 +87,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How it Works */}
-      <section className="py-20 gradient-bg-subtle bg-grid">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">How CloudZen Works</h2>
-            <p className="text-muted-foreground">Three simple steps to level up your career.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              { step: "01", title: "Learn", desc: "Watch expert-led courses, attend live workshops, and study at your own pace.", icon: BookOpen },
-              { step: "02", title: "Build", desc: "Practice with hands-on projects that simulate real-world scenarios.", icon: Code },
-              { step: "03", title: "Get Certified", desc: "Earn Open Badge 3.0 compliant credentials recognized globally.", icon: Award },
-            ].map((item, i) => (
-              <motion.div key={item.step} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
-                <Card className="text-center border-0 bg-transparent shadow-none h-full flex flex-col">
-                  <CardContent className="pt-6 flex-1 flex flex-col items-center">
-                    <div className="mx-auto mb-4 h-16 w-16 rounded-2xl gradient-bg flex items-center justify-center text-white">
-                      <item.icon className="h-7 w-7" />
-                    </div>
-                    <p className="text-sm font-bold text-primary mb-2">STEP {item.step}</p>
-                    <h3 className="font-display text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-base text-muted-foreground">{item.desc}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Featured Courses */}
       <section className="py-20 bg-grid">
         <div className="container">
