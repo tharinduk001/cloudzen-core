@@ -96,135 +96,92 @@ const Courses = () => {
   };
 
   return (
-    <div className="relative">
-      {/* Open Badge - Fixed in right margin, only on 2xl+ screens */}
+    <div className="container py-8">
+      <div className="mb-8">
+        <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Courses</h1>
+        <p className="text-muted-foreground">Explore our catalog of cloud, DevOps, and software engineering courses.</p>
+      </div>
+
+      {/* Open Badge Banner */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4 }}
-        className="hidden 2xl:block fixed right-4 top-28 w-[240px] z-30"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="rounded-xl gradient-bg p-6 md:p-8 text-white mb-8 shadow-lg"
       >
-        <div className="rounded-xl gradient-bg p-5 text-white shadow-lg">
-          <div className="flex items-center gap-2.5 mb-3">
-            <div className="p-2 bg-white/20 rounded-lg">
-              <Award className="h-5 w-5" />
+        <div className="flex flex-col md:flex-row md:items-center gap-6">
+          <div className="flex items-center gap-4 shrink-0">
+            <div className="p-3 bg-white/20 rounded-xl">
+              <Award className="h-8 w-8" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-sm leading-tight">Open Badge 3.0</h3>
-              <p className="text-white/60 text-[10px]">Globally Recognized</p>
+              <h3 className="font-display font-bold text-xl leading-tight">Open Badge 3.0 Certified</h3>
+              <p className="text-white/70 text-sm">Globally Recognized Digital Credentials</p>
             </div>
           </div>
 
-          <p className="text-xs text-white/80 mb-3 leading-relaxed">
-            Earn a <strong>verified digital credential</strong> with every course — recognized worldwide.
+          <p className="text-sm md:text-base text-white/85 leading-relaxed md:flex-1">
+            Every course completion earns you a <strong>verified digital credential</strong> compliant with the Open Badge 3.0 standard — recognized by employers and institutions worldwide.
           </p>
 
-          <div className="space-y-2 mb-4">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 shrink-0">
             {[
-              { icon: ShieldCheck, text: "Verifiable & tamper-proof" },
-              { icon: Globe, text: "Accepted globally" },
+              { icon: ShieldCheck, text: "Verifiable & Tamper-proof" },
+              { icon: Globe, text: "Globally Accepted" },
               { icon: CheckCircle, text: "Share on LinkedIn" },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-start gap-2">
-                <Icon className="h-3.5 w-3.5 mt-0.5 text-white/90 shrink-0" />
-                <span className="text-[11px] text-white/80">{text}</span>
+              <div key={text} className="flex items-center gap-2">
+                <Icon className="h-4 w-4 text-white/90" />
+                <span className="text-sm text-white/85 font-medium">{text}</span>
               </div>
             ))}
           </div>
 
-          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 transition-colors rounded-lg p-2.5 text-center">
-            <p className="text-[9px] text-white/50">Powered by</p>
-            <p className="font-display font-bold text-[11px]">CertDirectory</p>
+          <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white/10 hover:bg-white/15 transition-colors rounded-xl px-5 py-3 text-center">
+            <p className="text-[10px] text-white/50 mb-0.5">Powered by</p>
+            <p className="font-display font-bold text-sm">CertDirectory</p>
           </a>
         </div>
-
-        <Card className="mt-3 border-primary/20">
-          <CardContent className="p-3">
-            <h4 className="font-semibold text-xs mb-1.5 flex items-center gap-1.5">
-              <Award className="h-3.5 w-3.5 text-primary" />
-              How It Works
-            </h4>
-            <ol className="text-[11px] text-muted-foreground space-y-1.5">
-              <li className="flex gap-1.5"><span className="font-bold text-primary">1.</span> Complete a course</li>
-              <li className="flex gap-1.5"><span className="font-bold text-primary">2.</span> Get your digital badge</li>
-              <li className="flex gap-1.5"><span className="font-bold text-primary">3.</span> Share anywhere</li>
-            </ol>
-          </CardContent>
-        </Card>
       </motion.div>
 
-      <div className="container py-8">
-        <div className="mb-8">
-          <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Courses</h1>
-          <p className="text-muted-foreground">Explore our catalog of cloud, DevOps, and software engineering courses.</p>
+      {/* Filters */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        <div className="relative flex-1 min-w-[200px] max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="Search courses..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
         </div>
-
-        {/* Badge banner for smaller screens (below 2xl) */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="2xl:hidden rounded-xl gradient-bg p-5 text-white mb-8"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="p-2 bg-white/20 rounded-lg">
-                <Award className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="font-display font-bold text-base leading-tight">Open Badge 3.0 Certified</h3>
-                <p className="text-white/60 text-xs">Globally Recognized Credentials</p>
-              </div>
-            </div>
-            <p className="text-sm text-white/80 sm:flex-1">
-              Earn verified digital credentials with every course — recognized by employers worldwide.
-            </p>
-            <a href="https://credentials.certdirectory.io/" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white/10 hover:bg-white/15 transition-colors rounded-lg px-4 py-2 text-center">
-              <p className="text-[10px] text-white/50">Powered by</p>
-              <p className="font-display font-bold text-xs">CertDirectory</p>
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-6">
-          <div className="relative flex-1 min-w-[200px] max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search courses..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
-          </div>
-          <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="w-[160px]"><SelectValue placeholder="Category" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              <SelectItem value="Cloud">Cloud</SelectItem>
-              <SelectItem value="DevOps">DevOps</SelectItem>
-              <SelectItem value="Software Engineering">Software Engineering</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={level} onValueChange={setLevel}>
-            <SelectTrigger className="w-[160px]"><SelectValue placeholder="Level" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Levels</SelectItem>
-              <SelectItem value="Beginner">Beginner</SelectItem>
-              <SelectItem value="Intermediate">Intermediate</SelectItem>
-              <SelectItem value="Advanced">Advanced</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <Tabs defaultValue="all">
-          <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="Recorded Free">Free</TabsTrigger>
-            <TabsTrigger value="Recorded Premium">Premium</TabsTrigger>
-            <TabsTrigger value="Live">Live</TabsTrigger>
-          </TabsList>
-          <TabsContent value="all"><GroupedView /></TabsContent>
-          <TabsContent value="Recorded Free"><CourseGrid type="Recorded Free" /></TabsContent>
-          <TabsContent value="Recorded Premium"><CourseGrid type="Recorded Premium" /></TabsContent>
-          <TabsContent value="Live"><CourseGrid type="Live" /></TabsContent>
-        </Tabs>
+        <Select value={category} onValueChange={setCategory}>
+          <SelectTrigger className="w-[160px]"><SelectValue placeholder="Category" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="Cloud">Cloud</SelectItem>
+            <SelectItem value="DevOps">DevOps</SelectItem>
+            <SelectItem value="Software Engineering">Software Engineering</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={level} onValueChange={setLevel}>
+          <SelectTrigger className="w-[160px]"><SelectValue placeholder="Level" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Levels</SelectItem>
+            <SelectItem value="Beginner">Beginner</SelectItem>
+            <SelectItem value="Intermediate">Intermediate</SelectItem>
+            <SelectItem value="Advanced">Advanced</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
+
+      <Tabs defaultValue="all">
+        <TabsList>
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="Recorded Free">Free</TabsTrigger>
+          <TabsTrigger value="Recorded Premium">Premium</TabsTrigger>
+          <TabsTrigger value="Live">Live</TabsTrigger>
+        </TabsList>
+        <TabsContent value="all"><GroupedView /></TabsContent>
+        <TabsContent value="Recorded Free"><CourseGrid type="Recorded Free" /></TabsContent>
+        <TabsContent value="Recorded Premium"><CourseGrid type="Recorded Premium" /></TabsContent>
+        <TabsContent value="Live"><CourseGrid type="Live" /></TabsContent>
+      </Tabs>
     </div>
   );
 };
