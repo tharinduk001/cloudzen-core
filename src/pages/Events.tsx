@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Clock, Users } from "lucide-react";
+import { Calendar, MapPin, Clock, Users, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,20 +15,20 @@ const Events = () => {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
       <Link to={`/events/${event.id}`}>
         <Card className="hover-glow hover:border-primary/30 transition-all group h-full">
-          <CardContent className="p-5">
-            <div className="flex items-center gap-2 mb-3 flex-wrap">
-              <Badge variant={event.type === "Workshop" ? "default" : event.type === "Meetup" ? "secondary" : "outline"}>{event.type}</Badge>
-              {event.isPast && <Badge variant="outline" className="text-xs">Past</Badge>}
+          <CardContent className="p-8">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
+              <Badge variant={event.type === "Workshop" ? "default" : event.type === "Meetup" ? "secondary" : "outline"} className="text-sm px-3 py-1">{event.type}</Badge>
+              {event.isPast && <Badge variant="outline" className="text-sm">Past</Badge>}
             </div>
-            <h3 className="font-display text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{event.title}</h3>
-            <p className="text-sm text-muted-foreground mb-3">{event.description}</p>
-            <div className="space-y-1.5 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2"><Calendar className="h-3.5 w-3.5" />{event.date}</div>
-              <div className="flex items-center gap-2"><Clock className="h-3.5 w-3.5" />{event.time}</div>
-              <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5" />{event.location}</div>
-              <div className="flex items-center gap-2"><Users className="h-3.5 w-3.5" />{event.speakers.join(", ")}</div>
+            <h3 className="font-display text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{event.title}</h3>
+            <p className="text-base text-muted-foreground mb-5 leading-relaxed">{event.description}</p>
+            <div className="space-y-2.5 text-base text-muted-foreground">
+              <div className="flex items-center gap-3"><Calendar className="h-5 w-5 text-primary/60" />{event.date}</div>
+              <div className="flex items-center gap-3"><Clock className="h-5 w-5 text-primary/60" />{event.time}</div>
+              <div className="flex items-center gap-3"><MapPin className="h-5 w-5 text-primary/60" />{event.location}</div>
+              <div className="flex items-center gap-3"><Users className="h-5 w-5 text-primary/60" />{event.speakers.join(", ")}</div>
             </div>
-            {!event.isPast && <Button size="sm" className="mt-4 gradient-bg text-white border-0">Register</Button>}
+            {!event.isPast && <Button size="lg" className="mt-6 gradient-bg text-white border-0 h-12 text-base">Register Now <ArrowRight className="ml-2 h-4 w-4" /></Button>}
           </CardContent>
         </Card>
       </Link>
@@ -36,23 +36,28 @@ const Events = () => {
   );
 
   return (
-    <div className="container py-8">
-      <div className="mb-8">
-        <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">Events</h1>
-        <p className="text-muted-foreground">Join our community meetups, workshops, and webinars.</p>
-      </div>
+    <div className="container py-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-12"
+      >
+        <h1 className="font-display text-5xl lg:text-6xl font-bold mb-4">Events</h1>
+        <p className="text-xl text-muted-foreground">Join our community meetups, workshops, and webinars.</p>
+      </motion.div>
+
       <Tabs defaultValue="upcoming">
-        <TabsList>
-          <TabsTrigger value="upcoming">Upcoming ({upcoming.length})</TabsTrigger>
-          <TabsTrigger value="past">Past ({past.length})</TabsTrigger>
+        <TabsList className="h-12">
+          <TabsTrigger value="upcoming" className="text-base px-6">Upcoming ({upcoming.length})</TabsTrigger>
+          <TabsTrigger value="past" className="text-base px-6">Past ({past.length})</TabsTrigger>
         </TabsList>
         <TabsContent value="upcoming">
-          <div className="grid sm:grid-cols-2 gap-6 mt-6">
+          <div className="grid lg:grid-cols-2 gap-8 mt-8">
             {upcoming.map((e, i) => <EventCard key={e.id} event={e} i={i} />)}
           </div>
         </TabsContent>
         <TabsContent value="past">
-          <div className="grid sm:grid-cols-2 gap-6 mt-6">
+          <div className="grid lg:grid-cols-2 gap-8 mt-8">
             {past.map((e, i) => <EventCard key={e.id} event={e} i={i} />)}
           </div>
         </TabsContent>

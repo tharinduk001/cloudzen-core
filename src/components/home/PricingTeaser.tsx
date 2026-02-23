@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Shield, ArrowRight, Star, Zap, Crown } from "lucide-react";
+import { Check, Shield, ArrowRight, Star, Zap, Crown, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { pricingPlans } from "@/data/mock-data";
@@ -16,13 +16,13 @@ const PricingTeaser = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl lg:text-6xl font-bold mb-4">Invest in Your Future</h2>
-          <p className="text-xl text-muted-foreground">Choose your plan and start learning today.</p>
+          <h2 className="font-display text-6xl lg:text-7xl font-bold mb-6">Invest in Your Future</h2>
+          <p className="text-2xl text-muted-foreground">Choose your plan and start learning today.</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-10 max-w-4xl mx-auto" style={{ perspective: "1000px" }}>
+        <div className="grid grid-cols-2 gap-12 max-w-5xl mx-auto" style={{ perspective: "1000px" }}>
           {pricingPlans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -33,64 +33,89 @@ const PricingTeaser = () => {
               whileHover={{ y: -10, scale: 1.02 }}
               className="h-full"
             >
-              <div className={`h-full rounded-2xl border p-10 flex flex-col relative overflow-hidden transition-all duration-300 ${
+              <div className={`h-full rounded-2xl border p-12 flex flex-col relative overflow-hidden transition-all duration-300 ${
                 plan.highlighted
                   ? "border-primary/50 pricing-glow bg-card shadow-2xl"
                   : "border-border/40 bg-card/80 backdrop-blur-sm hover:border-primary/20"
               }`}>
                 {plan.highlighted && (
                   <>
-                    <div className="absolute top-0 left-0 right-0 h-1 gradient-bg" />
-                    <Badge className="absolute top-4 right-4 gradient-bg text-white border-0 px-3 py-1">
-                      <Crown className="h-3 w-3 mr-1" /> Best Value
+                    <div className="absolute top-0 left-0 right-0 h-1.5 gradient-bg" />
+                    <Badge className="absolute top-5 right-5 gradient-bg text-white border-0 px-4 py-1.5 text-sm">
+                      <Crown className="h-4 w-4 mr-1" /> Best Value
                     </Badge>
                   </>
                 )}
 
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-3 mb-4">
                   {plan.highlighted ? (
-                    <Star className="h-6 w-6 text-primary fill-primary" />
+                    <Star className="h-8 w-8 text-primary fill-primary" />
                   ) : (
-                    <Zap className="h-6 w-6 text-muted-foreground" />
+                    <Zap className="h-8 w-8 text-muted-foreground" />
                   )}
-                  <h3 className="font-display font-bold text-3xl">{plan.name}</h3>
+                  <h3 className="font-display font-bold text-4xl">{plan.name}</h3>
                 </div>
-                <p className="text-muted-foreground mb-8">{plan.description}</p>
+                <p className="text-lg text-muted-foreground mb-10">{plan.description}</p>
 
-                <div className="mb-8">
+                <div className="mb-10">
                   <div className="flex items-baseline gap-1">
-                    <span className="font-display font-bold text-6xl">
+                    <span className="font-display font-bold text-7xl">
                       ${plan.price === "0" ? "0" : plan.price.split("/")[0]}
                     </span>
                     {plan.price !== "0" && (
-                      <span className="text-muted-foreground text-lg">/month</span>
+                      <span className="text-muted-foreground text-xl">/month</span>
                     )}
                   </div>
                   {plan.highlighted && (
-                    <p className="text-sm text-primary mt-2 font-medium">🔥 Save 40% — was $32/mo</p>
+                    <p className="text-base text-primary mt-3 font-medium">🔥 Save 40% — was $32/mo</p>
                   )}
                 </div>
 
-                <ul className="space-y-4 mb-10 flex-1">
+                <ul className="space-y-5 mb-12 flex-1">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-base">
-                      <Check className={`h-5 w-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? "text-primary" : "text-muted-foreground"}`} />
+                    <li key={f} className="flex items-start gap-3 text-lg">
+                      <Check className={`h-6 w-6 mt-0.5 flex-shrink-0 ${plan.highlighted ? "text-primary" : "text-muted-foreground"}`} />
                       <span>{f}</span>
                     </li>
                   ))}
                 </ul>
 
-                <Button
-                  size="lg"
-                  className={`w-full h-14 text-lg ${plan.highlighted ? "gradient-bg text-white border-0 cta-confetti" : ""}`}
-                  variant={plan.highlighted ? "default" : "outline"}
-                  asChild
-                >
-                  <Link to="/courses">
-                    {plan.highlighted ? "Unlock Full Access" : "Start Free"}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
+                {plan.highlighted ? (
+                  <div className="flex gap-3">
+                    <Button
+                      size="lg"
+                      className="flex-1 h-16 text-lg gradient-bg text-white border-0 cta-confetti"
+                      asChild
+                    >
+                      <Link to="/courses">
+                        <ShoppingCart className="mr-2 h-5 w-5" />
+                        Add to Cart
+                      </Link>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="h-16 text-lg px-6"
+                      asChild
+                    >
+                      <Link to="/courses">
+                        Details <ArrowRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="w-full h-16 text-lg"
+                    variant="outline"
+                    asChild
+                  >
+                    <Link to="/courses">
+                      Start Free
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                )}
               </div>
             </motion.div>
           ))}
@@ -100,9 +125,9 @@ const PricingTeaser = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-8 mt-12 text-muted-foreground"
+          className="flex items-center justify-center gap-8 mt-14 text-lg text-muted-foreground"
         >
-          <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Cancel anytime</span>
+          <span className="flex items-center gap-2"><Shield className="h-5 w-5 text-primary" /> Cancel anytime</span>
           <span className="text-border">•</span>
           <span>7-day money back guarantee</span>
           <span className="text-border">•</span>
