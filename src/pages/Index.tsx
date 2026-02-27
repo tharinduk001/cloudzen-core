@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { OrbitCategories } from "@/components/home/OrbitCategories";
+import { TgsPlayer } from "@/components/TgsPlayer";
 import { courses, projects, testimonials } from "@/data/mock-data";
 
 const fadeUp = {
@@ -77,9 +78,9 @@ const Index = () => {
             <p className="text-muted-foreground max-w-xl mx-auto">From cloud foundations to advanced DevOps — find the right skills for your career.</p>
           </div>
           <div className="relative">
-            {/* Center Lottie animation */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-44 md:h-44 z-20 pointer-events-none">
-              {heroAnim && <Lottie animationData={heroAnim} loop className="w-full h-full drop-shadow-lg" />}
+            {/* Center TGS sticker */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 z-20 pointer-events-none">
+              <TgsPlayer src="/animations/orbit-sticker.tgs" className="w-full h-full drop-shadow-xl" />
             </div>
             <OrbitCategories />
           </div>
