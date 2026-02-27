@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote } from "lucide-react";
-import Lottie from "lottie-react";
-import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,28 +15,17 @@ const fadeUp = {
 };
 
 const Index = () => {
-  const [heroAnim, setHeroAnim] = useState<object | null>(null);
-
-  useEffect(() => {
-    fetch("/animations/network-hero.json")
-      .then((r) => r.json())
-      .then(setHeroAnim)
-      .catch(console.error);
-  }, []);
 
   return (
     <div className="overflow-hidden">
-      {/* Hero */}
-      <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
+      {/* Hero with Orbit Categories */}
+      <section className="relative py-16 md:py-24 gradient-bg-subtle bg-grid overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-float" />
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
         </div>
         <div className="container relative">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center">
-            <div className="mx-auto mb-6 w-48 h-48 md:w-64 md:h-64">
-              {heroAnim && <Lottie animationData={heroAnim} loop className="w-full h-full" />}
-            </div>
+          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center mb-4">
             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
               <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
             </Badge>
@@ -46,9 +33,20 @@ const Index = () => {
                Advanced Skills.{" "}
                <span className="gradient-text">Simplified Learning.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
             </p>
+          </motion.div>
+
+          {/* Orbit: TGS sticker center + categories around */}
+          <div className="relative my-4">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 z-20 pointer-events-none">
+              <TgsPlayer src="/animations/orbit-sticker.tgs" className="w-full h-full drop-shadow-xl" />
+            </div>
+            <OrbitCategories />
+          </div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-center mt-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg" className="gradient-bg text-white border-0 text-base px-8" asChild>
                 <Link to="/courses">Explore Courses <ArrowRight className="ml-2 h-4 w-4" /></Link>
@@ -58,8 +56,9 @@ const Index = () => {
               </Button>
             </div>
           </motion.div>
+
           {/* Trust Indicators */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }} className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
             {[{ icon: Award, text: "Open Badge 3.0" }, { icon: Zap, text: "Hands-on Projects" }, { icon: TrendingUp, text: "Career-Focused" }, { icon: Users, text: "5,000+ Students" }].map((item) => (
               <div key={item.text} className="flex items-center gap-2">
                 <item.icon className="h-4 w-4 text-primary" />
@@ -67,23 +66,6 @@ const Index = () => {
               </div>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Categories - Orbit Layout */}
-      <section className="py-20 bg-grid">
-        <div className="container">
-          <div className="text-center mb-8">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Explore by Category</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">From cloud foundations to advanced DevOps — find the right skills for your career.</p>
-          </div>
-          <div className="relative">
-            {/* Center TGS sticker */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 z-20 pointer-events-none">
-              <TgsPlayer src="/animations/orbit-sticker.tgs" className="w-full h-full drop-shadow-xl" />
-            </div>
-            <OrbitCategories />
-          </div>
         </div>
       </section>
 
