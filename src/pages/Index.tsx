@@ -1,21 +1,18 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, CheckCircle2, TrendingUp, Quote } from "lucide-react";
+import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote } from "lucide-react";
 import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { courses, projects, testimonials, categories } from "@/data/mock-data";
+import { OrbitCategories } from "@/components/home/OrbitCategories";
+import { courses, projects, testimonials } from "@/data/mock-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
-};
-
-const iconMap: Record<string, React.ElementType> = {
-  Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers,
 };
 
 const Index = () => {
