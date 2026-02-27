@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, CheckCircle2, TrendingUp, Quote } from "lucide-react";
-import { TgsPlayer } from "@/components/TgsPlayer";
+import Lottie from "lottie-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -18,6 +19,15 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const Index = () => {
+  const [heroAnim, setHeroAnim] = useState<object | null>(null);
+
+  useEffect(() => {
+    fetch("/animations/network-hero.json")
+      .then((r) => r.json())
+      .then(setHeroAnim)
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="overflow-hidden">
       {/* Hero */}
@@ -29,7 +39,7 @@ const Index = () => {
         <div className="container relative">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center">
             <div className="mx-auto mb-6 w-48 h-48 md:w-64 md:h-64">
-              <TgsPlayer src="/animations/hero-sticker.tgs" className="w-full h-full" />
+              {heroAnim && <Lottie animationData={heroAnim} loop className="w-full h-full" />}
             </div>
             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
               <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
