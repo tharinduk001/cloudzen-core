@@ -33,7 +33,7 @@ const Index = () => {
         </div>
         <div className="container relative">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center">
-            <div className="mx-auto mb-6 w-32 h-32 md:w-40 md:h-40">
+            <div className="mx-auto mb-6 w-48 h-48 md:w-64 md:h-64">
               <TgsPlayer src="/animations/hero-sticker.tgs" className="w-full h-full" />
             </div>
             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
