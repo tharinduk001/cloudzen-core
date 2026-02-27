@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote } from "lucide-react";
+import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { OrbitCategories } from "@/components/home/OrbitCategories";
-import { TgsPlayer } from "@/components/TgsPlayer";
-import { courses, projects, testimonials } from "@/data/mock-data";
+import { courses, projects, testimonials, categories } from "@/data/mock-data";
+
+const iconMap: Record<string, React.ElementType> = {
+  Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers,
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -38,13 +40,20 @@ const Index = () => {
             </p>
           </motion.div>
 
-          {/* Orbit: TGS sticker center + categories around */}
-          <div className="relative my-4">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 z-20 pointer-events-none">
-              <TgsPlayer src="/animations/orbit-sticker.tgs" className="w-full h-full drop-shadow-xl" />
-            </div>
-            <OrbitCategories />
-          </div>
+          {/* Category Buttons */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-wrap items-center justify-center gap-3 my-6">
+            {categories.map((cat) => {
+              const Icon = iconMap[cat.icon] || Cloud;
+              return (
+                <Link key={cat.name} to="/courses">
+                  <Badge variant="outline" className="px-4 py-2 text-sm font-medium gap-2 cursor-pointer hover:bg-primary/10 hover:border-primary/40 transition-all">
+                    <Icon className="h-4 w-4 text-primary" />
+                    {cat.name}
+                  </Badge>
+                </Link>
+              );
+            })}
+          </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-center mt-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
