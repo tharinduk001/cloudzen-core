@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, CheckCircle2, TrendingUp, Quote } from "lucide-react";
-import { TgsPlayer } from "@/components/TgsPlayer";
-import { FloatingSticker } from "@/components/FloatingSticker";
+import heroNetworking from "@/assets/hero-networking.png";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,11 +20,6 @@ const iconMap: Record<string, React.ElementType> = {
 const Index = () => {
   return (
     <div className="overflow-hidden">
-      <FloatingSticker
-        src="/animations/floating-sticker.tgs"
-        className="hidden sm:block bottom-8 right-6 w-20 h-20 md:w-28 md:h-28 opacity-70"
-        scrollTo="featured-courses"
-      />
       {/* Hero */}
       <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -34,7 +29,7 @@ const Index = () => {
         <div className="container relative">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center">
             <div className="mx-auto mb-6 w-48 h-48 md:w-64 md:h-64">
-              <TgsPlayer src="/animations/hero-sticker.tgs" className="w-full h-full" />
+              <img src={heroNetworking} alt="Computer networking mascot" className="w-full h-full object-contain drop-shadow-lg" />
             </div>
             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
               <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
