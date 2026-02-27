@@ -20,13 +20,45 @@ const Index = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero with Orbit Categories */}
+      {/* Hero */}
       <section className="relative py-16 md:py-24 gradient-bg-subtle bg-grid overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-float" />
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
         </div>
         <div className="container relative">
+          {/* Floating Category Icons - decorative animation */}
+          <div className="relative h-16 md:h-20 mb-4">
+            {categories.map((cat, i) => {
+              const Icon = iconMap[cat.icon] || Cloud;
+              const xPos = 15 + (i * (70 / (categories.length - 1)));
+              return (
+                <motion.div
+                  key={cat.name}
+                  className="absolute"
+                  style={{ left: `${xPos}%`, top: "50%" }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{
+                    opacity: [0.4, 0.8, 0.4],
+                    scale: [0.9, 1.1, 0.9],
+                    y: [0, -8, 0],
+                    x: [0, i % 2 === 0 ? 6 : -6, 0],
+                  }}
+                  transition={{
+                    delay: i * 0.15,
+                    duration: 4 + i * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-white shadow-md`}>
+                    <Icon className="h-4 w-4 md:h-5 md:w-5" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center mb-4">
             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
               <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
@@ -38,21 +70,6 @@ const Index = () => {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
             </p>
-          </motion.div>
-
-          {/* Category Buttons */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-wrap items-center justify-center gap-3 my-6">
-            {categories.map((cat) => {
-              const Icon = iconMap[cat.icon] || Cloud;
-              return (
-                <Link key={cat.name} to="/courses">
-                  <Badge variant="outline" className="px-4 py-2 text-sm font-medium gap-2 cursor-pointer hover:bg-primary/10 hover:border-primary/40 transition-all">
-                    <Icon className="h-4 w-4 text-primary" />
-                    {cat.name}
-                  </Badge>
-                </Link>
-              );
-            })}
           </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-center mt-4">
