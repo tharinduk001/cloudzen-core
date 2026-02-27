@@ -22,7 +22,7 @@ const Index = () => {
     <div className="overflow-hidden">
       <FloatingSticker
         src="/animations/floating-sticker.tgs"
-        className="bottom-24 right-6 w-20 h-20 md:w-28 md:h-28 opacity-70"
+        className="hidden sm:block bottom-8 right-6 w-20 h-20 md:w-28 md:h-28 opacity-70"
       />
       {/* Hero */}
       <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
