@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, CheckCircle2, TrendingUp, Quote } from "lucide-react";
 import { TgsPlayer } from "@/components/TgsPlayer";
+import { FloatingSticker } from "@/components/FloatingSticker";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,10 @@ const iconMap: Record<string, React.ElementType> = {
 const Index = () => {
   return (
     <div className="overflow-hidden">
+      <FloatingSticker
+        src="/animations/floating-sticker.tgs"
+        className="bottom-24 right-6 w-20 h-20 md:w-28 md:h-28 opacity-70"
+      />
       {/* Hero */}
       <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
