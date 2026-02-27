@@ -23,6 +23,7 @@ const Index = () => {
       <FloatingSticker
         src="/animations/floating-sticker.tgs"
         className="hidden sm:block bottom-8 right-6 w-20 h-20 md:w-28 md:h-28 opacity-70"
+        scrollTo="featured-courses"
       />
       {/* Hero */}
       <section className="relative py-20 md:py-32 gradient-bg-subtle bg-grid overflow-hidden">
@@ -97,7 +98,7 @@ const Index = () => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20 bg-grid">
+      <section id="featured-courses" className="py-20 bg-grid">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
