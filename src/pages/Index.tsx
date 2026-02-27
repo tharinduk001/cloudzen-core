@@ -69,32 +69,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Categories - Orbit Layout */}
       <section className="py-20 bg-grid">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Explore by Category</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">From cloud foundations to advanced DevOps — find the right skills for your career.</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
-            {categories.map((cat, i) => {
-              const Icon = iconMap[cat.icon] || Cloud;
-              return (
-                <motion.div key={cat.name} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="h-full">
-                  <Link to="/courses" className="block h-full">
-                    <Card className="text-center hover-glow hover:border-primary/30 transition-all group h-full flex flex-col">
-                      <CardContent className="pt-6 pb-4 flex-1 flex flex-col items-center justify-center">
-                        <div className={`mx-auto mb-3 h-12 w-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <h3 className="font-display font-semibold text-sm">{cat.name}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{cat.count} courses</p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </motion.div>
-              );
-            })}
+          <div className="relative">
+            {/* Center Lottie animation */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-44 md:h-44 z-20 pointer-events-none">
+              {heroAnim && <Lottie animationData={heroAnim} loop className="w-full h-full drop-shadow-lg" />}
+            </div>
+            <OrbitCategories />
           </div>
         </div>
       </section>
