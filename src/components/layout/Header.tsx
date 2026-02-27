@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { TgsPlayer } from "@/components/TgsPlayer";
 
 const primaryNav: { label: string; path: string; comingSoon?: boolean }[] = [
   { label: "About", path: "/about" },
@@ -46,8 +45,8 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold">
-          <div className="h-9 w-9 flex-shrink-0">
-            <TgsPlayer src="/animations/orbit-sticker.tgs" className="w-full h-full" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-bg">
+            <span className="text-sm font-bold text-white">CZ</span>
           </div>
           <span>Cloud<span className="gradient-text">Zen</span></span>
         </Link>
