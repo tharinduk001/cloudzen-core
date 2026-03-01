@@ -211,14 +211,14 @@ const Index = () => {
                     International Standard
                   </Badge>
                   <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
-                    Open Badge 3.0 Compliant Credentials
+                    We Offer Open Badge 3.0 Compliant Credentials
                   </h2>
                   <p className="text-base md:text-lg opacity-90 mb-6 max-w-2xl">
                     Earn industry-recognized digital badges powered by CertDirectory Credentials that prove your skills to employers worldwide.
                   </p>
 
                   {/* Features */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
                       { icon: "🔒", label: "Tamper-Proof" },
                       { icon: "🌐", label: "Globally Verifiable" },
@@ -230,15 +230,6 @@ const Index = () => {
                         <span className="text-sm font-medium">{feature.label}</span>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3">
-                    <Button size="lg" variant="secondary" className="text-base px-8" asChild>
-                      <Link to="/courses">Explore Courses</Link>
-                    </Button>
-                    <Button size="lg" variant="outline" className="text-base px-8 border-white/40 bg-white/15 text-white hover:bg-white/25" asChild>
-                      <Link to="/about">Learn More</Link>
-                    </Button>
                   </div>
                 </div>
               </div>
