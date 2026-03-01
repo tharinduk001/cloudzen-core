@@ -39,7 +39,7 @@ const Index = () => {
                 <span className="gradient-text">Simplified Learning.</span>
               </h1>
               <p className="text-base md:text-lg text-muted-foreground max-w-xl mb-5">
-                Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
+                CloudZen is the Sri Lanka's most reliable platform for learn Cloud, DevOps, Full Stack Development and QA Engineering with the simplest way!
               </p>
 
               {/* Category Buttons */}
