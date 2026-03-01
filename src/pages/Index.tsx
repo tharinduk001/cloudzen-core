@@ -5,6 +5,7 @@ import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, Tre
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import HeroTerminal from "@/components/home/HeroTerminal";
 import { courses, projects, testimonials, categories } from "@/data/mock-data";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -27,54 +28,60 @@ const Index = () => {
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
         </div>
         <div className="container relative">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl mx-auto text-center mb-4">
-            <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
-              <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
-            </Badge>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-               Advanced Skills.{" "}
-               <span className="gradient-text">Simplified Learning.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Left column - Text */}
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-medium">
+                <Award className="h-3.5 w-3.5 mr-1.5" /> Open Badge 3.0 Compliant
+              </Badge>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                Advanced Skills.{" "}
+                <span className="gradient-text">Simplified Learning.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-6">
+                Online courses (recorded + live), hands-on projects, interview practice, roadmaps, and Open Badge 3.0 compliant digital badges.
+              </p>
 
-          {/* Category Buttons */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-wrap items-center justify-center gap-3 my-6">
-            {categories.map((cat) => {
-              const Icon = iconMap[cat.icon] || Cloud;
-              return (
-                <Link key={cat.name} to="/courses">
-                  <Badge variant="outline" className="px-4 py-2 text-sm font-medium gap-2 cursor-pointer hover:bg-primary/10 hover:border-primary/40 transition-all">
-                    <Icon className="h-4 w-4 text-primary" />
-                    {cat.name}
-                  </Badge>
-                </Link>
-              );
-            })}
-          </motion.div>
+              {/* Category Buttons */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-wrap gap-2 mb-8">
+                {categories.map((cat) => {
+                  const Icon = iconMap[cat.icon] || Cloud;
+                  return (
+                    <Link key={cat.name} to="/courses">
+                      <Badge variant="outline" className="px-3 py-1.5 text-sm font-medium gap-1.5 cursor-pointer hover:bg-primary/10 hover:border-primary/40 transition-all">
+                        <Icon className="h-3.5 w-3.5 text-primary" />
+                        {cat.name}
+                      </Badge>
+                    </Link>
+                  );
+                })}
+              </motion.div>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-center mt-4">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="gradient-bg text-white border-0 text-base px-8" asChild>
-                <Link to="/courses">Explore Courses <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
-              <Button size="lg" variant="outline" className="text-base px-8" asChild>
-                <Link to="/consultations">Contact Us</Link>
-              </Button>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="gradient-bg text-primary-foreground border-0 text-base px-8" asChild>
+                  <Link to="/courses">Explore Courses <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+                <Button size="lg" variant="outline" className="text-base px-8" asChild>
+                  <Link to="/consultations">Contact Us</Link>
+                </Button>
+              </motion.div>
+
+              {/* Trust Indicators */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }} className="mt-8 flex flex-wrap gap-6 text-sm text-muted-foreground">
+                {[{ icon: Award, text: "Open Badge 3.0" }, { icon: Zap, text: "Hands-on Projects" }, { icon: TrendingUp, text: "Career-Focused" }, { icon: Users, text: "5,000+ Students" }].map((item) => (
+                  <div key={item.text} className="flex items-center gap-2">
+                    <item.icon className="h-4 w-4 text-primary" />
+                    <span>{item.text}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right column - Terminal */}
+            <div className="hidden lg:block">
+              <HeroTerminal />
             </div>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }} className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
-            {[{ icon: Award, text: "Open Badge 3.0" }, { icon: Zap, text: "Hands-on Projects" }, { icon: TrendingUp, text: "Career-Focused" }, { icon: Users, text: "5,000+ Students" }].map((item) => (
-              <div key={item.text} className="flex items-center gap-2">
-                <item.icon className="h-4 w-4 text-primary" />
-                <span>{item.text}</span>
-              </div>
-            ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
