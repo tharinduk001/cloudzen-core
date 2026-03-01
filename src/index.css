@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -40,7 +40,7 @@
     --input: 210 20% 88%;
     --ring: 210 85% 55%;
 
-    --radius: 0.625rem;
+    --radius: 0.375rem;
 
     --gradient-start: 210 85% 55%;
     --gradient-mid: 220 65% 42%;
@@ -106,17 +106,21 @@
   }
 
   html {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', 'Georgia', sans-serif;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Yaldevi', sans-serif;
-    font-weight: 500;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
   }
 }
 
