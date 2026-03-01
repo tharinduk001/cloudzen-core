@@ -191,23 +191,56 @@ const Index = () => {
 
 
 
-      {/* CTA Banner */}
+      {/* Open Badge 3.0 Banner */}
       <section className="py-20 bg-grid">
         <div className="container">
           <Card className="gradient-bg border-0 overflow-hidden relative">
             <div className="absolute inset-0 bg-black/10" />
-            <CardContent className="relative p-8 md:p-12 text-center text-white">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Get a Personalized Learning Plan</h2>
-              <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
-                Not sure where to start? Our experts will create a custom roadmap tailored to your goals.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" variant="secondary" className="text-base px-8" asChild>
-                  <Link to="/consultations">Contact Us</Link>
-                </Button>
-                <Button size="lg" variant="outline" className="text-base px-8 border-white/40 bg-white/15 text-white hover:bg-white/25" asChild>
-                  <Link to="/learning-paths">Browse Paths</Link>
-                </Button>
+            <CardContent className="relative p-8 md:p-12 text-white">
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                {/* Badge Icon */}
+                <div className="flex-shrink-0">
+                  <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                    <Award className="h-16 w-16 md:h-20 md:w-20 text-white" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 text-center lg:text-left">
+                  <Badge variant="secondary" className="mb-3 px-3 py-1 text-xs font-semibold">
+                    International Standard
+                  </Badge>
+                  <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
+                    Open Badge 3.0 Compliant Credentials
+                  </h2>
+                  <p className="text-base md:text-lg opacity-90 mb-6 max-w-2xl">
+                    Earn industry-recognized digital badges powered by CertDirectory Credentials that prove your skills to employers worldwide.
+                  </p>
+
+                  {/* Features */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                    {[
+                      { icon: "🔒", label: "Tamper-Proof" },
+                      { icon: "🌐", label: "Globally Verifiable" },
+                      { icon: "📱", label: "Offline Backed" },
+                      { icon: "🔗", label: "Shareable on LinkedIn" },
+                    ].map((feature) => (
+                      <div key={feature.label} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2.5 border border-white/10">
+                        <span className="text-lg">{feature.icon}</span>
+                        <span className="text-sm font-medium">{feature.label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3">
+                    <Button size="lg" variant="secondary" className="text-base px-8" asChild>
+                      <Link to="/courses">Explore Courses</Link>
+                    </Button>
+                    <Button size="lg" variant="outline" className="text-base px-8 border-white/40 bg-white/15 text-white hover:bg-white/25" asChild>
+                      <Link to="/about">Learn More</Link>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
