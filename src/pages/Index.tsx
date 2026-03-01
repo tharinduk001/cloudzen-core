@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote, Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers } from "lucide-react";
+import { ArrowRight, Star, Clock, Users, Award, ChevronRight, BookOpen, Zap, TrendingUp, Quote, Cloud, Settings, Code, CheckCircle, RefreshCw, Brain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import HeroTerminal from "@/components/home/HeroTerminal";
 import { courses, projects, testimonials, categories } from "@/data/mock-data";
 
 const iconMap: Record<string, React.ElementType> = {
-  Cloud, Settings, Code, GitBranch, RefreshCw, Box, Layers,
+  Cloud, Settings, Code, CheckCircle, RefreshCw, Brain,
 };
 
 const fadeUp = {

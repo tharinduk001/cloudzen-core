@@ -231,8 +231,7 @@ export const categories = [
   { name: "Cloud", icon: "Cloud", count: 12, color: "from-blue-500 to-blue-600" },
   { name: "DevOps", icon: "Settings", count: 18, color: "from-purple-500 to-purple-600" },
   { name: "Software Engineering", icon: "Code", count: 8, color: "from-cyan-500 to-cyan-600" },
-  { name: "Git & GitHub", icon: "GitBranch", count: 5, color: "from-orange-500 to-orange-600" },
-  { name: "CI/CD", icon: "RefreshCw", count: 6, color: "from-green-500 to-green-600" },
-  { name: "Kubernetes", icon: "Box", count: 7, color: "from-indigo-500 to-indigo-600" },
-  { name: "Terraform", icon: "Layers", count: 4, color: "from-violet-500 to-violet-600" },
+  { name: "QA", icon: "CheckCircle", count: 6, color: "from-green-500 to-green-600" },
+  { name: "Automation", icon: "RefreshCw", count: 7, color: "from-orange-500 to-orange-600" },
+  { name: "AI/ML", icon: "Brain", count: 5, color: "from-violet-500 to-violet-600" },
 ];
