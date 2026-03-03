@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import HeroTerminal from "@/components/home/HeroTerminal";
 import { courses, projects, testimonials, categories } from "@/data/mock-data";
+import RecentMomentsGallery from "@/components/home/RecentMomentsGallery";
 
 const iconMap: Record<string, React.ElementType> = {
   Cloud, Settings, Code, CheckCircle, RefreshCw, Brain,
