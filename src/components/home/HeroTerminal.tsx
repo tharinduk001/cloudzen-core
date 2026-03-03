@@ -1,18 +1,18 @@
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const techLogos = [
-  { name: "Kubernetes", icon: "⎈", color: "hsl(210, 90%, 58%)" },
-  { name: "Docker", icon: "🐳", color: "hsl(200, 80%, 50%)" },
-  { name: "Git", icon: "", color: "hsl(12, 80%, 55%)" },
-  { name: "Linux", icon: "🐧", color: "hsl(45, 80%, 55%)" },
-  { name: "AWS", icon: "☁", color: "hsl(30, 90%, 55%)" },
-  { name: "Terraform", icon: "⬡", color: "hsl(265, 60%, 58%)" },
-  { name: "Ansible", icon: "⚙", color: "hsl(0, 0%, 75%)" },
-  { name: "Jenkins", icon: "⚡", color: "hsl(0, 65%, 50%)" },
+  { name: "Kubernetes", icon: "⎈", color: "#326CE5", bg: "#326CE520" },
+  { name: "Docker", icon: "🐳", color: "#2496ED", bg: "#2496ED20" },
+  { name: "Git", icon: "", color: "#F05032", bg: "#F0503220" },
+  { name: "Linux", icon: "🐧", color: "#FCC624", bg: "#FCC62420" },
+  { name: "AWS", icon: "☁", color: "#FF9900", bg: "#FF990020" },
+  { name: "Terraform", icon: "⬡", color: "#7B42BC", bg: "#7B42BC20" },
+  { name: "Ansible", icon: "⚙", color: "#EE0000", bg: "#EE000020" },
+  { name: "Jenkins", icon: "⚡", color: "#D24939", bg: "#D2493920" },
 ];
 
-const DitherCanvas = () => {
+const DitherOverlay = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -21,120 +21,73 @@ const DitherCanvas = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const w = 400;
-    const h = 320;
-    canvas.width = w;
-    canvas.height = h;
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
     let frame = 0;
-
-    const drawDither = () => {
+    const draw = () => {
+      const w = canvas.width;
+      const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Dithering background pattern
-      for (let y = 0; y < h; y += 3) {
-        for (let x = 0; x < w; x += 3) {
-          const noise = Math.sin(x * 0.02 + frame * 0.02) * Math.cos(y * 0.02 + frame * 0.015);
-          const dist = Math.sqrt((x - w / 2) ** 2 + (y - h / 2) ** 2) / (w * 0.5);
-          const threshold = noise * 0.5 + (1 - dist) * 0.4;
+      for (let y = 0; y < h; y += 4) {
+        for (let x = 0; x < w; x += 4) {
+          const noise = Math.sin(x * 0.015 + frame * 0.012) * Math.cos(y * 0.015 + frame * 0.01);
+          const dist = Math.sqrt((x - w / 2) ** 2 + (y - h / 2) ** 2) / (w * 0.6);
+          const threshold = noise * 0.5 + (1 - dist) * 0.3;
 
-          if (threshold > 0.15 + Math.random() * 0.3) {
-            const alpha = Math.max(0.05, Math.min(0.35, threshold * 0.4));
-            ctx.fillStyle = `hsla(210, 90%, 58%, ${alpha})`;
-            ctx.fillRect(x, y, 2, 2);
+          if (threshold > 0.1 + Math.random() * 0.35) {
+            const alpha = Math.max(0.03, Math.min(0.2, threshold * 0.25));
+            ctx.fillStyle = `rgba(100, 160, 255, ${alpha})`;
+            ctx.fillRect(x, y, 3, 3);
           }
         }
       }
 
-      // Draw tech logo circles with dither halos
-      techLogos.forEach((logo, i) => {
-        const angle = (i / techLogos.length) * Math.PI * 2 + frame * 0.005;
-        const rx = 120 + Math.sin(frame * 0.008 + i) * 20;
-        const ry = 90 + Math.cos(frame * 0.008 + i) * 15;
-        const cx = w / 2 + Math.cos(angle) * rx;
-        const cy = h / 2 + Math.sin(angle) * ry;
-
-        // Dither halo around each logo
-        for (let r = 30; r > 0; r -= 2) {
-          const ditherChance = (30 - r) / 30;
-          for (let a = 0; a < Math.PI * 2; a += 0.3) {
-            if (Math.random() < ditherChance * 0.6) {
-              const px = cx + Math.cos(a) * r + (Math.random() - 0.5) * 4;
-              const py = cy + Math.sin(a) * r + (Math.random() - 0.5) * 4;
-              ctx.fillStyle = logo.color.replace(")", ", 0.15)").replace("hsl(", "hsla(");
-              ctx.fillRect(px, py, 2, 2);
-            }
-          }
-        }
-
-        // Logo background circle
-        ctx.beginPath();
-        ctx.arc(cx, cy, 18, 0, Math.PI * 2);
-        ctx.fillStyle = logo.color.replace(")", ", 0.12)").replace("hsl(", "hsla(");
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, 18, 0, Math.PI * 2);
-        ctx.strokeStyle = logo.color.replace(")", ", 0.4)").replace("hsl(", "hsla(");
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        // Icon text
-        ctx.font = "16px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = logo.color;
-        ctx.fillText(logo.icon, cx, cy);
-      });
-
-      // Connecting lines between logos
-      ctx.strokeStyle = "hsla(210, 90%, 58%, 0.08)";
-      ctx.lineWidth = 1;
-      techLogos.forEach((_, i) => {
-        const angle1 = (i / techLogos.length) * Math.PI * 2 + frame * 0.005;
-        const rx1 = 120 + Math.sin(frame * 0.008 + i) * 20;
-        const ry1 = 90 + Math.cos(frame * 0.008 + i) * 15;
-        const cx1 = w / 2 + Math.cos(angle1) * rx1;
-        const cy1 = h / 2 + Math.sin(angle1) * ry1;
-
-        const j = (i + 1) % techLogos.length;
-        const angle2 = (j / techLogos.length) * Math.PI * 2 + frame * 0.005;
-        const rx2 = 120 + Math.sin(frame * 0.008 + j) * 20;
-        const ry2 = 90 + Math.cos(frame * 0.008 + j) * 15;
-        const cx2 = w / 2 + Math.cos(angle2) * rx2;
-        const cy2 = h / 2 + Math.sin(angle2) * ry2;
-
-        ctx.beginPath();
-        ctx.setLineDash([4, 4]);
-        ctx.moveTo(cx1, cy1);
-        ctx.lineTo(cx2, cy2);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      });
-
       frame++;
-      requestAnimationFrame(drawDither);
+      requestAnimationFrame(draw);
     };
 
-    const animId = requestAnimationFrame(drawDither);
-    return () => cancelAnimationFrame(animId);
+    const id = requestAnimationFrame(draw);
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />;
 };
 
 const HeroTerminal = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % techLogos.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const visibleLogos = [
+    techLogos[currentIndex],
+    techLogos[(currentIndex + 1) % techLogos.length],
+    techLogos[(currentIndex + 2) % techLogos.length],
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.7, delay: 0.3 }}
-      className="relative w-full max-w-lg mx-auto"
+      className="relative w-full max-w-xl mx-auto"
     >
-      {/* Terminal frame */}
-      <div className="rounded-xl border border-border bg-card/80 backdrop-blur-sm shadow-xl overflow-hidden">
+      <div className="rounded-xl border border-border bg-card/80 backdrop-blur-sm shadow-2xl overflow-hidden">
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-muted/50">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/50">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-full bg-destructive/70" />
             <span className="w-3 h-3 rounded-full bg-accent/70" />
@@ -143,30 +96,56 @@ const HeroTerminal = () => {
           <span className="text-xs font-mono text-muted-foreground ml-2">cloudzen ~ / devops-stack</span>
         </div>
 
-        {/* Terminal content */}
-        <div className="relative h-[320px] bg-background/50">
-          <DitherCanvas />
+        {/* Terminal content - enlarged */}
+        <div className="relative h-[420px] bg-background/50 overflow-hidden">
+          <DitherOverlay />
 
-          {/* Overlay labels */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-4 pointer-events-none">
-            <div className="flex flex-wrap justify-center gap-2 px-4">
-              {techLogos.map((logo, i) => (
-                <motion.span
-                  key={logo.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 + i * 0.08 }}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-border bg-card/80 text-muted-foreground"
+          {/* Sliding full-size logos */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <AnimatePresence mode="popLayout">
+              {visibleLogos.map((logo, i) => (
+                <motion.div
+                  key={`${logo.name}-${(currentIndex + i) % techLogos.length}`}
+                  initial={{ x: 200, opacity: 0, scale: 0.7 }}
+                  animate={{ x: 0, opacity: 1, scale: 1 }}
+                  exit={{ x: -200, opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="flex flex-col items-center justify-center mx-4"
                 >
-                  {logo.name}
-                </motion.span>
+                  <div
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex items-center justify-center border border-border/50 backdrop-blur-sm shadow-lg"
+                    style={{ background: logo.bg }}
+                  >
+                    <span className="text-5xl md:text-6xl select-none" style={{ filter: "contrast(1.2)" }}>
+                      {logo.icon}
+                    </span>
+                  </div>
+                  <span
+                    className="mt-3 text-sm font-mono font-semibold tracking-wide"
+                    style={{ color: logo.color }}
+                  >
+                    {logo.name}
+                  </span>
+                </motion.div>
               ))}
-            </div>
+            </AnimatePresence>
+          </div>
+
+          {/* Dots indicator */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10">
+            {techLogos.map((_, i) => (
+              <div
+                key={i}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? "bg-primary w-4" : "bg-muted-foreground/30"
+                }`}
+              />
+            ))}
           </div>
         </div>
 
         {/* Terminal prompt */}
-        <div className="px-4 py-2.5 border-t border-border bg-muted/30">
+        <div className="px-4 py-3 border-t border-border bg-muted/30">
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="text-primary">$</span>
             <motion.span
