@@ -155,7 +155,8 @@ const Index = () => {
         </div>
       </section>
 
-
+      {/* Recent Moments Gallery */}
+      <RecentMomentsGallery />
 
 
       {/* Testimonials */}
