@@ -165,19 +165,19 @@ const HeroTerminal = () => {
         </div>
 
         {/* Terminal prompt */}
-        <div className="px-4 py-2.5 border-t border-border bg-muted/30">
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="text-primary">$</span>
-            <motion.span
-              className="text-muted-foreground"
+        <div className="px-4 py-2.5 border-t border-border bg-muted/30 h-10 flex items-center">
+          <div className="flex items-center gap-2 text-xs font-mono w-full overflow-hidden whitespace-nowrap">
+            <span className="text-primary flex-shrink-0">$</span>
+            <motion.div
+              className="overflow-hidden flex-shrink-0"
               initial={{ width: 0 }}
-              animate={{ width: "auto" }}
-              transition={{ delay: 1.5, duration: 1 }}
+              animate={{ width: 280 }}
+              transition={{ delay: 1.5, duration: 1, ease: "linear" }}
             >
-              kubectl get pods --all-namespaces
-            </motion.span>
+              <span className="text-muted-foreground">kubectl get pods --all-namespaces</span>
+            </motion.div>
             <motion.span
-              className="w-2 h-4 bg-primary/70"
+              className="w-2 h-4 bg-primary/70 flex-shrink-0"
               animate={{ opacity: [1, 0] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
             />
